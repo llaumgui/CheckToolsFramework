@@ -12,4 +12,4 @@ WIP
 
 Continuous integration
 ======================
-QATools is under continuous integration: http://ci.llaumgui.com/job/QATools/
+QATools is under continuous integration: [http://ci.llaumgui.com/job/QATools/](http://ci.llaumgui.com/job/QATools/)
