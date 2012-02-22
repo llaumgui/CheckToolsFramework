@@ -1,0 +1,12 @@
+source:
+  - src
+destination: gh-pages
+
+templateTheme: bootstrap
+title: "CheckToolsFramework API Documentation (master)"
+tree: Yes
+download: No
+todo: Yes
+
+baseUrl: "https://github.com/llaumgui/CheckToolsFramework"
+googleAnalytics: "UA-63534466-2"

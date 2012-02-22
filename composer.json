@@ -1,0 +1,28 @@
+{
+  "name": "llaumgui/check-tools-framework",
+  "type": "library",
+  "description": "PHP library for building check tools.",
+  "keywords": ["junit", "QA", "checktool", "checktools", "check", "tools", "tool", "quality"],
+  "license": "MIT",
+  "homepage": "https://github.com/llaumgui/CheckToolsFramework",
+  "support": {
+    "issues": "https://github.com/llaumgui/CheckToolsFramework/issues",
+    "source": "https://github.com/llaumgui/CheckToolsFramework"
+  },
+  "authors": [{
+    "name": "Guillaume Kulakowski",
+    "email": "guillaume@kulakowski.fr",
+    "homepage": "http://blog.kulakowski.fr"
+  }],
+  "require": {
+    "php": ">=5.3.3",
+    "llaumgui/junit-xml" : "dev-develop"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Llaumgui\\CheckToolsFramework\\": "src/"
+    }
+  }
+}
