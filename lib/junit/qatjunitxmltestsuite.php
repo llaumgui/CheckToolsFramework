@@ -54,16 +54,39 @@ class qatJunitXMLTestSuite extends qatJunitXML
      * @var float
      */
     private $time;
+    /**
+     * @var qatJunitXMLTestSuites
+     */
+    private $mainTestSuite = null;
 
 
 
     /**
      * Constructor
+     *
+     * @param qatJunitXMLTestSuite $mainTestSuite
      */
-    public function qatJUnitXMLTestSuite()
+    public function qatJUnitXMLTestSuite( qatJunitXMLTestSuite $mainTestSuite = null )
     {
+        if( $mainTestSuite instanceof qatJunitXMLTestSuite)
+        {
+            $this->mainTestSuite = $mainTestSuite;
+        }
         $this->beginimeTime = microtime( true );
         $this->xmlTestSuite = new DOMElement( 'testsuite' );
+    }
+
+
+
+    /**
+     * Add a test suite on a main TestSuite
+     */
+    public function addTestSuite()
+    {
+        $ts = new qatJunitXMLTestSuite( $this );
+        $this->xmlTestSuite->appendChild( $ts->getXMLTestSuite() );
+
+        return $ts;
     }
 
 
@@ -73,7 +96,7 @@ class qatJunitXMLTestSuite extends qatJunitXML
      */
     public function addTest()
     {
-        $this->tests++;
+        $this->incTest();
 
         $test = new qatJunitXMLTestCase( $this );
         $this->xmlTestSuite->appendChild( $test->getXMLTestCase() );
@@ -88,6 +111,14 @@ class qatJunitXMLTestSuite extends qatJunitXML
      */
     public function finish()
     {
+        // For a testsuite children of a testsuite
+        if ( $this->mainTestSuite instanceof qatJunitXMLTestSuite )
+        {
+            $this->mainTestSuite->incTest( $this->tests );
+            $this->mainTestSuite->incError( $this->errors );
+            $this->mainTestSuite->incFailures( $this->failures );
+        }
+
         $this->time = microtime( true ) - $this->beginimeTime;
 
         $this->xmlTestSuite->setAttribute( 'tests', $this->tests );
@@ -126,6 +157,18 @@ class qatJunitXMLTestSuite extends qatJunitXML
         $this->file = $file;
 
         $this->xmlTestSuite->setAttribute( 'file', $this->file );
+    }
+
+
+
+    /**
+     * Increment test
+     *
+     * @param int $inc
+     */
+    public function incTest( $inc = 1 )
+    {
+        $this->tests += $inc;
     }
 
 

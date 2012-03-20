@@ -18,6 +18,8 @@ $ct->addOptionOutput();
 $ct->addOptionIncludeFilters( array( '@\.php$@' ) );
 $ct->addOptionExcludeFilters();
 $ct->addOptionAllowCRLF();
+$ct->addOptionAllowNotUTF8();
+$ct->addOptionAllowBOM();
 $ct->addOptionAllowLineAfterTag();
 $ct->addArgSource();
 
@@ -28,14 +30,15 @@ $ct->output->outputLine();
 
 // Go tests
 $testSuites = qatJunitXMLTestSuites::getInstance();
+$mainTestSuites = $testSuites->addTestSuite();
 
 foreach ( $ct->findRecursiveFromArg() as $file )
 {
     $ct->output->outputLine( $file );
 
-    $testSuite = $testSuites->addTestSuite();
-    $testSuite->setName( 'Check PHP files' );
-    $testSuite->setFile( __FILE__ );
+    $testSuite = $mainTestSuites->addTestSuite();
+    $testSuite->setName( "Check PHP files: {$file}" );
+    $testSuite->setFile( $file );
 
     $contentFile = file_get_contents( $file );
 
@@ -47,6 +50,7 @@ foreach ( $ct->findRecursiveFromArg() as $file )
     $contentFile = null;
     $testSuite->finish();
 }
+$mainTestSuites->finish();
 
 $ct->output->outputLine( "\n" . 'Checked.' );
 

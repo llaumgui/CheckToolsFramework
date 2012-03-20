@@ -67,20 +67,23 @@ abstract class qatTest
     {
         $ct = qatConsoleTools::getInstance();
 
-        $checkEncoding = $testSuite->addTest();
-        $checkEncoding->setName( 'Check file encoding' );
-        $checkEncoding->setFile( $file );
-        $checkEncoding->setAssertions( 1 );
-
-        $encoding = mb_detect_encoding( $contentFile, self::ENCODING_LIST );
-        if ( $encoding !== 'UTF-8' )
+        if ( $ct->options['allowNotUTF']->value == false )
         {
-            $message = 'The file "' . $file . '" has a non UTF-8 encoding (' . $encoding . ').';
-            $checkEncoding->addFaillure( 'Charset', $message );
-            $ct->output->outputLine( $message, 'error' );
-        }
+            $checkEncoding = $testSuite->addTest();
+            $checkEncoding->setName( 'Check file encoding' );
+            $checkEncoding->setFile( $file );
+            $checkEncoding->setAssertions( 1 );
 
-        $checkEncoding->finish();
+            $encoding = mb_detect_encoding( $contentFile, self::ENCODING_LIST );
+            if ( $encoding !== 'UTF-8' )
+            {
+                $message = 'The file "' . $file . '" has a non UTF-8 encoding (' . $encoding . ').';
+                $checkEncoding->addFaillure( 'Charset', $message );
+                $ct->output->outputLine( $message, 'error' );
+            }
+
+            $checkEncoding->finish();
+        }
     }
 
 
@@ -96,20 +99,23 @@ abstract class qatTest
     {
         $ct = qatConsoleTools::getInstance();
 
-        $checkBOM = $testSuite->addTest();
-        $checkBOM->setName( 'Check file BOM' );
-        $checkBOM->setFile( $file );
-        $checkBOM->setAssertions( 1 );
-
-        $bom = pack( 'CCC', 0xef, 0xbb, 0xbf );
-        if ( strncmp( $contentFile, $bom, 3 ) == 0 )
+        if ( $ct->options['allowBOM']->value == false )
         {
-            $message = 'The file "' . $file . '" has a BOM.';
-            $checkBOM->addFaillure( 'BOM', $message );
-            $ct->output->outputLine( $message, 'error' );
-        }
+            $checkBOM = $testSuite->addTest();
+            $checkBOM->setName( 'Check file BOM' );
+            $checkBOM->setFile( $file );
+            $checkBOM->setAssertions( 1 );
 
-        $checkBOM->finish();
+            $bom = pack( 'CCC', 0xef, 0xbb, 0xbf );
+            if ( strncmp( $contentFile, $bom, 3 ) == 0 )
+            {
+                $message = 'The file "' . $file . '" has a BOM.';
+                $checkBOM->addFaillure( 'BOM', $message );
+                $ct->output->outputLine( $message, 'error' );
+            }
+
+            $checkBOM->finish();
+        }
     }
 }
 

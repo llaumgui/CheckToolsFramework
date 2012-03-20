@@ -23,6 +23,8 @@ $ct->addOptionOutput();
 $ct->addOptionIncludeFilters( array( '@\.tpl$@' ) );
 $ct->addOptionExcludeFilters();
 $ct->addOptionAllowCRLF();
+$ct->addOptionAllowNotUTF8();
+$ct->addOptionAllowBOM();
 $ct->addArgSource();
 
 // Process
@@ -33,14 +35,15 @@ $ct->output->outputLine();
 // Go tests
 $tpl = eZTemplate::factory();
 $testSuites = qatJunitXMLTestSuites::getInstance();
+$mainTestSuites = $testSuites->addTestSuite();
 
 foreach ( $ct->findRecursiveFromArg() as $file )
 {
     $ct->output->outputLine( $file );
 
     $testSuite = $testSuites->addTestSuite();
-    $testSuite->setName( 'Check eZ Publish templates' );
-    $testSuite->setFile( __FILE__ );
+    $testSuite->setName( "Check eZ Publish templates: {$file}" );
+    $testSuite->setFile( $file );
 
     $contentFile = file_get_contents( $file );
 
@@ -50,8 +53,9 @@ foreach ( $ct->findRecursiveFromArg() as $file )
     qatTestEztpl::checkTemplateSyntaxe( $testSuite, $file, $contentFile, $tpl );
 
     $contentFile = null;
-    $testSuite->finish();
+    $testSuite->finish( $mainTestSuites );
 }
+$mainTestSuites->finish();
 
 $ct->output->outputLine( "\n" . 'Checked.' );
 

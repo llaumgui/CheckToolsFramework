@@ -266,7 +266,7 @@ class qatConsoleTools
     public function addOptionAllowCRLF()
     {
         $this->options['allowCRLF'] = $this->input->registerOption( new ezcConsoleOption(
-            '', // short
+            'c', // short
             'allowCRLF', // long
             ezcConsoleInput::TYPE_NONE, // type
             false, // default
@@ -278,12 +278,46 @@ class qatConsoleTools
 
 
     /**
+     * Add allowNotUTF option
+     */
+    public function addOptionAllowNotUTF8()
+    {
+        $this->options['allowNotUTF'] = $this->input->registerOption( new ezcConsoleOption(
+                'u', // short
+                'allowNotUTF', // long
+        ezcConsoleInput::TYPE_NONE, // type
+        false, // default
+        false, // multiple
+                'Allow files not in UTF8.', // shorthelp
+                'Dont\'t check if file is encoded in UTF-8, allow all charsets.' // longhelp
+        ) );
+    }
+
+
+    /**
+     * Add allowBOM option
+     */
+    public function addOptionAllowBOM()
+    {
+        $this->options['allowBOM'] = $this->input->registerOption( new ezcConsoleOption(
+                    'b', // short
+                    'allowNotUTF', // long
+        ezcConsoleInput::TYPE_NONE, // type
+        false, // default
+        false, // multiple
+                    'Allow BOM in files.', // shorthelp
+                    'Allow BOM in files.' // longhelp
+        ) );
+    }
+
+
+    /**
      * Add allowLineAfterTag option
      */
     public function addOptionAllowLineAfterTag()
     {
         $this->options['allowLineAfterTag'] = $this->input->registerOption( new ezcConsoleOption(
-            '', // short
+            'l', // short
             'allowLineAfterTag', // long
             ezcConsoleInput::TYPE_NONE, // type
             false, // default
