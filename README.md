@@ -1,10 +1,20 @@
 What is QATools ?
 ----------------
-TODO
+QATools is a test framework who use JUnit XML format for output.
+
 
 QATools features
 ===============
-TODO
+* Check for PHP Files (.php):
+ * Check line delimiter (CRLF VS LF).
+ * Check encoding and detec non UTF-8.
+ * Check BOM in files.
+ * Check if file don't finish by blank line
+* Check for eZ Publish template Files (.tpl):
+ * Check line delimiter (CRLF VS LF).
+ * Check encoding and detec non UTF-8.
+ * Check BOM in files.
+ * Check template syntaxe.
 
 Statut
 ======

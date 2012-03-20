@@ -1,0 +1,6 @@
+Dependances
+===========
+QATools require [eZ Components](http://ezcomponents.org/). You can:
+
+* [Install eZ Components](http://ezcomponents.org/docs/install) before using QAtools,
+* Download eZ Components and put the components in the lib/ezc directory.
