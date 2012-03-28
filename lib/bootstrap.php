@@ -19,10 +19,15 @@ if( !defined( 'EZCBASE_ENABLED' ) OR EZCBASE_ENABLED !== true )
         $baseEnabled = @include 'Base/src/base.php';
         if ( !$baseEnabled )
         {
-            $baseEnabled = include dirname( __FILE__ ) . '/ezc/Base/src/base.php';
+            $baseEnabled = @include dirname( __FILE__ ) . '/ezc/Base/src/base.php';
         }
     }
     define( 'EZCBASE_LOADED', $baseEnabled );
+}
+
+if ( !EZCBASE_LOADED )
+{
+    trigger_error( 'eZ Components is not avalaible on your system. Please read README file first !', E_USER_ERROR );
 }
 
 spl_autoload_register( array( 'ezcBase', 'autoload' ) );
