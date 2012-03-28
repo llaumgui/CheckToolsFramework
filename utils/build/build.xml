@@ -30,7 +30,7 @@
     <property name="qatools.php.cmd" value="/opt/qatools/bin/qatools-php.php" />
     <property name="qatools.php.options" value="" />
     <property name="qatools.php.options.include" value="" />
-    <property name="qatools.php.options.exclude" value="" />
+    <property name="qatools.php.options.exclude" value="-e '@tests@" />
 
     <!-- QA : JSLint -->
     <property name="jslint.cmd" value="jslint" />
@@ -46,6 +46,7 @@
     <!-- QA : Patternset -->
     <patternset id="pattern.php">
         <include name="**/*.php"/>
+        <exclude name="tests/*.php"/>
     </patternset>
 
     <patternset id="pattern.css">
