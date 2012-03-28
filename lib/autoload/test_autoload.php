@@ -10,8 +10,9 @@
 
 return array (
     'qatTest' => 'test/qattest.php',
-    'qatTestPhp' => 'test/qattestphp.php',
     'qatTestEztpl' => 'test/qattesteztpl.php',
+    'qatTestPhp' => 'test/qattestphp.php',
+    'qatTestXml' => 'test/qattestxml.php',
 );
 
 ?>
