@@ -301,7 +301,7 @@ class qatConsoleTools
     {
         $this->options['allowBOM'] = $this->input->registerOption( new ezcConsoleOption(
                     'b', // short
-                    'allowNotUTF', // long
+                    'allowBOM', // long
         ezcConsoleInput::TYPE_NONE, // type
         false, // default
         false, // multiple
