@@ -16,10 +16,6 @@ QATools features
  * Check BOM in files.
  * Check template syntaxe.
 
-Statut
-======
-WIP
-
 Continuous integration
 ======================
 QATools is under continuous integration: [http://ci.llaumgui.com/job/QATools/](http://ci.llaumgui.com/job/QATools/)
