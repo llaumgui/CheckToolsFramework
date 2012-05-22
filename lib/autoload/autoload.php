@@ -10,6 +10,7 @@
 
 return array (
     'qatConsoleTools' => 'qatconsoletools.php',
+    'qatLazyConfigurationConfiguration' => 'qatlazyconfigurationconfiguration.php',
 );
 
 ?>

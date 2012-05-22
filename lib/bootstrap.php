@@ -39,4 +39,14 @@ spl_autoload_register( array( 'ezcBase', 'autoload' ) );
  */
 ezcBase::addClassRepository( dirname( __FILE__ ), null );
 
+
+/*
+ * configuration lazy init
+ */
+define( 'QAT_CONF_PATH', dirname( __FILE__ ) . '/../conf' ); // Packagers "sed" it !
+ezcBaseInit::setCallback(
+    'ezcInitConfigurationManager',
+    'qatLazyConfigurationConfiguration'
+);
+
 ?>

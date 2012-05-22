@@ -19,14 +19,6 @@
 class qatTestEztpl extends qatTest
 {
 
-    private static $toSkip = array(
-        'this is most likely a bug in the template parser'
-    );
-
-
-
-
-
     /**
      * Check if is there a line after the final PHP close tag
      *
@@ -37,6 +29,9 @@ class qatTestEztpl extends qatTest
      */
     public static function checkTemplateSyntaxe( qatJunitXMLTestSuite &$testSuite, $file, &$contentFile, eZTemplate &$tpl )
     {
+        $cfg = ezcConfigurationManager::getInstance();
+        $toSkip = $cfg->getSetting( 'eztpl', 'Validator', 'ErrorsToSkip' );
+
         $checkTemplateSyntaxe = $testSuite->addTest();
         $checkTemplateSyntaxe->setName( 'Check eZ Publish templates syntaxe' );
         $checkTemplateSyntaxe->setFile( $file );
@@ -50,7 +45,7 @@ class qatTestEztpl extends qatTest
                 $skip = false;
 
                 // Skip bad error
-                foreach ( self::$toSkip as $skiped )
+                foreach ( $toSkip as $skiped )
                 {
                     if( strpos( $message, $skiped ) )
                     {
