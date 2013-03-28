@@ -1,0 +1,14 @@
+﻿var courses = {
+ "fruits": [
+   { "kiwis": 3,
+     "mangues": 4,
+     "pommes": null
+   },
+   { "panier": true },
+ ],
+ "legumes":
+   { "patates": "amandine",
+     "figues": "de barbarie",
+     "poireaux": false
+   }
+};

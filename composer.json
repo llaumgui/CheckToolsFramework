@@ -1,0 +1,16 @@
+ {
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/class-loader": "2.2.*",
+        "symfony/yaml": "2.2.*",
+        "symfony/console": "2.*",
+        "symfony/finder": "*",        
+        "twig/twig": "*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

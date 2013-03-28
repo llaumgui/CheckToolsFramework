@@ -1,6 +1,6 @@
 <?php
 /**
- * File containing the qatTestPhp class.
+ * File containing the qatTestXml class.
  *
  * @version //autogentag//
  * @package QATools
@@ -9,9 +9,9 @@
  */
 
 /**
- * The qatTestPhp class.
+ * The qatTestXml class.
  *
- * Provide tests for php file.
+ * Provide tests for xml file.
  *
  * @package QATools
  * @version //autogentag//

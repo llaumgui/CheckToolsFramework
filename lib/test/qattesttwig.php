@@ -1,6 +1,6 @@
 <?php
 /**
- * File containing the qatTestEztpl class.
+ * File containing the qatTesttwigl class.
  *
  * @version //autogentag//
  * @package QATools
@@ -9,34 +9,59 @@
  */
 
 /**
- * The qatTestEztpl class.
+ * The qatTestEztwig class.
  *
- * Provide tests for eZ Publish templates file.
+ * Provide tests for Symfony templates file.
  *
  * @package QATools
  * @version //autogentag//
  */
-class qatTestEztpl extends qatTest
+ 
+/*
+ *Module Console pour chargement Twig 
+ * 
+ */
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Finder\Finder;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+
+
+class qatTestTwig extends qatTest 
 {
 
     /**
-     * Check if is any error in eZ Publish templates file.
+     * Check if is any error in Symfony template
      *
      * @param qatJunitXMLTestSuite $testSuite
      * @param string $file
      * @param string $contentFile
-     * @param eZTemplate $tpl
+     * @param Symfony template $twig
      */
-    public static function checkTemplateSyntaxe( qatJunitXMLTestSuite &$testSuite, $file, &$contentFile, eZTemplate &$tpl )
+    public static function checkTemplateSyntaxe( qatJunitXMLTestSuite &$testSuite, $file, &$contentFile )
     {
-        $cfg = ezcConfigurationManager::getInstance();
-        $toSkip = $cfg->getSetting( 'eztpl', 'Validator', 'ErrorsToSkip' );
-
         $checkTemplateSyntaxe = $testSuite->addTest();
-        $checkTemplateSyntaxe->setName( 'Check eZ Publish templates syntaxe' );
+        $checkTemplateSyntaxe->setName( 'Check Symfony templates syntaxe' );
         $checkTemplateSyntaxe->setFile( $file );
         $checkTemplateSyntaxe->setAssertions( 1 );
+        $stdout = fopen('php://stdout','w');
+        
+        
 
+        $console = new Application();
+        fwrite($stdout,"valeur de loader : ".print_r($console));
+        
+        $commands[] = new LintCommand();
+        $console->run();
+        
+        
+        fclose($stdout);
+        
+        
+        /*
         if (  !$tpl->validateTemplateFile( $file ) )
         {
             foreach ( $tpl->errorLog() as $error )
@@ -60,7 +85,7 @@ class qatTestEztpl extends qatTest
                     $ct->output->outputLine( $message, 'error' );
                 }
             }
-        }
+        }*/
 
         $checkTemplateSyntaxe->finish();
     }

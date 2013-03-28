@@ -12,7 +12,10 @@ return array (
     'qatTest' => 'test/qattest.php',
     'qatTestEztpl' => 'test/qattesteztpl.php',
     'qatTestPhp' => 'test/qattestphp.php',
+	'qatTestTwig' => 'test/qattesttwig.php',
     'qatTestXml' => 'test/qattestxml.php',
+	'qatTestJson' => 'test/qattestjson.php',
+	'qatTestYml' => 'test/qattestyml.php',
 );
 
 ?>
