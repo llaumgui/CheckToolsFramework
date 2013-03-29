@@ -10,10 +10,12 @@
 /* Reactiver pour qatestyml via autoload*/
 if("LOAD_SYMFONY")
 {
-	require_once('/../vendor/autoload.php');
+	require_once(__DIR__.'/../vendor/autoload.php');
 }
-
-
+if("LOAD_TWIG")
+{
+	require_once  (__DIR__.'/../vendor/twig/twig/lib/Twig/Autoloader.php');
+}
 use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 /*

@@ -9,7 +9,7 @@
  */
 
 /**
- * The qatTestEztwig class.
+ * The qatTesttwig class.
  *
  * Provide tests for Symfony templates file.
  *
@@ -18,17 +18,9 @@
  */
  
 /*
- *Module Console pour chargement Twig 
+ *Module Console pour test template Twig 
  * 
  */
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\Finder;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-
 
 class qatTestTwig extends qatTest 
 {
@@ -39,55 +31,34 @@ class qatTestTwig extends qatTest
      * @param qatJunitXMLTestSuite $testSuite
      * @param string $file
      * @param string $contentFile
-     * @param Symfony template $twig
+     * 
      */
     public static function checkTemplateSyntaxe( qatJunitXMLTestSuite &$testSuite, $file, &$contentFile )
     {
+    	$ct = qatConsoleTools::getInstance();
+    	
         $checkTemplateSyntaxe = $testSuite->addTest();
         $checkTemplateSyntaxe->setName( 'Check Symfony templates syntaxe' );
         $checkTemplateSyntaxe->setFile( $file );
         $checkTemplateSyntaxe->setAssertions( 1 );
-        $stdout = fopen('php://stdout','w');
-        
-        
+        $message='';  
+            
+        Twig_Autoloader::register();
+        $loader1 = new Twig_Loader_Array(array(
+        		$file.'html' => $contentFile,
+        ));
+        $twig = new Twig_Environment($loader1);
+        try {
+        	$template = $twig->loadTemplate($file.'html');
 
-        $console = new Application();
-        fwrite($stdout,"valeur de loader : ".print_r($console));
-        
-        $commands[] = new LintCommand();
-        $console->run();
-        
-        
-        fclose($stdout);
-        
-        
-        /*
-        if (  !$tpl->validateTemplateFile( $file ) )
-        {
-            foreach ( $tpl->errorLog() as $error )
-            {
-                $message = $error['text'];
-                $skip = false;
+       }
+       catch (Twig_Error_Syntax $e) {
+	        $message = $e->getMessage();
+        	$checkTemplateSyntaxe->addFaillure( 'TWIG Template', $message );
+            $ct->output->outputLine( $message, 'error' );
+       }	
 
-                // Skip bad error
-                foreach ( $toSkip as $skiped )
-                {
-                    if( strpos( $message, $skiped ) )
-                    {
-                        $skip = true;
-                        break;
-                    }
-                }
-
-                if ( !$skip )
-                {
-                    $checkTemplateSyntaxe->addFaillure( 'Template syntaxe: ' . $error['name'], $message );
-                    $ct->output->outputLine( $message, 'error' );
-                }
-            }
-        }*/
-
-        $checkTemplateSyntaxe->finish();
+       $checkTemplateSyntaxe->finish();
     }
 }
 

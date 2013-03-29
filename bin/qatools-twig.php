@@ -1,13 +1,13 @@
 <?php
 /**
- * File containing the qatools-php file.
+ * File containing the qatools-twig file.
  *
  * @version //autogentag//
  * @package QATools
  * @copyright Copyright (C) 2012 Guillaume Kulakowski and contributors
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0
  */
-define("LOADSYMFONY", true);
+define("LOAD_TWIG", true);
 
 require dirname( __FILE__ ) . '/../lib/bootstrap.php'; // Packagers "sed" it !
 
@@ -35,7 +35,7 @@ foreach ( $ct->findRecursiveFromArg() as $file )
 {
     $ct->output->outputLine( $file );
     $testSuite = $mainTestSuites->addTestSuite();
-    $testSuite->setName( "Check PHP files: {$file}" );
+    $testSuite->setName( "Check TWIG files: {$file}" );
     $testSuite->setFile( $file );
 
     $contentFile = file_get_contents( $file );
