@@ -6,7 +6,7 @@ var courses = {
    },
    { "panier": true },
  ],
- "légumes":
+ "lï¿½gumes":
    { "patates": "amandine",
      "figues": "de barbarie",
      "poireaux": false

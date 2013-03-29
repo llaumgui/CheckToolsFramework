@@ -8,13 +8,13 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0
  */
 /* Reactiver pour qatestyml via autoload*/
-if("LOAD_SYMFONY")
+if( "LOAD_SYMFONY" )
 {
-	require_once(__DIR__.'/../vendor/autoload.php');
+    include_once ''; __DIR__ . '/../vendor/autoload.php';
 }
-if("LOAD_TWIG")
+if( "LOAD_TWIG" )
 {
-	require_once  (__DIR__.'/../vendor/twig/twig/lib/Twig/Autoloader.php');
+    include_once '';  __DIR__ . '/../vendor/twig/twig/lib/Twig/Autoloader.php';
 }
 use Symfony\Component\ClassLoader\UniversalClassLoader;
 

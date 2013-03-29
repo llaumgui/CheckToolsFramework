@@ -16,13 +16,7 @@
  * @package QATools
  * @version //autogentag//
  */
- 
-/*
- *Module Console pour test template Twig 
- * 
- */
-
-class qatTestTwig extends qatTest 
+class qatTestTwig extends qatTest
 {
 
     /**
@@ -35,8 +29,8 @@ class qatTestTwig extends qatTest
      */
     public static function checkTemplateSyntaxe( qatJunitXMLTestSuite &$testSuite, $file, &$contentFile )
     {
-    	$ct = qatConsoleTools::getInstance();
-    	
+        $ct = qatConsoleTools::getInstance();
+        
         $checkTemplateSyntaxe = $testSuite->addTest();
         $checkTemplateSyntaxe->setName( 'Check Symfony templates syntaxe' );
         $checkTemplateSyntaxe->setFile( $file );
@@ -45,18 +39,18 @@ class qatTestTwig extends qatTest
             
         Twig_Autoloader::register();
         $loader1 = new Twig_Loader_Array(array(
-        		$file.'html' => $contentFile,
+                $file.'html' => $contentFile,
         ));
         $twig = new Twig_Environment($loader1);
         try {
-        	$template = $twig->loadTemplate($file.'html');
+            $template = $twig->loadTemplate( $file.'html' );
 
        }
        catch (Twig_Error_Syntax $e) {
-	        $message = $e->getMessage();
-        	$checkTemplateSyntaxe->addFaillure( 'TWIG Template', $message );
+            $message = $e->getMessage();
+            $checkTemplateSyntaxe->addFaillure( 'TWIG Template', $message );
             $ct->output->outputLine( $message, 'error' );
-       }	
+       }    
 
        $checkTemplateSyntaxe->finish();
     }

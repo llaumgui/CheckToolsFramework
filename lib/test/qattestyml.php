@@ -8,6 +8,13 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0
  */
 
+
+
+/*  Pour version autoload
+ *    use Symfony\Component\Yaml\Yaml;
+ */
+
+use Symfony\Component\Yaml\Yaml;
 /**
  * The qatTestYml class.
  *
@@ -16,13 +23,6 @@
  * @package QATools
  * @version //autogentag//
  */
-
-/*  Pour version autoload
- *	use Symfony\Component\Yaml\Yaml;
- */
-
-use Symfony\Component\Yaml\Yaml;
-
 class qatTestYml extends qatTest
 {
 
@@ -42,11 +42,14 @@ class qatTestYml extends qatTest
         $checkValidity->setFile( $file );
         $checkValidity->setAssertions( 1 );
         
-        try {
-        	Yaml::parse($yml); //try to parse 
-        } catch (Exception $e) {
-        	$message = $e->getMessage();
-        	$checkValidity->addFaillure( 'YML', $message );
+        try 
+        {
+            Yaml::parse( $yml ); //try to parse 
+        }
+        catch (Exception $e) 
+        {
+            $message = $e->getMessage();
+            $checkValidity->addFaillure( 'YML', $message );
             $ct->output->outputLine( $message, 'error' );
         }
         

@@ -16,6 +16,7 @@ return array (
     'qatTestXml' => 'test/qattestxml.php',
 	'qatTestJson' => 'test/qattestjson.php',
 	'qatTestYml' => 'test/qattestyml.php',
+	'qatTestDoctrine' => 'test/qattestdoctrine.php',
 );
 
 ?>

@@ -34,37 +34,37 @@ class qatTestJson extends qatTest
         $checkValidity->setName( 'Check if JSON is valid' );
         $checkValidity->setFile( $file );
         $checkValidity->setAssertions( 1 );
-        $json  = json_decode($contentFile);
-       	$output=null;
+        $json  = json_decode( $contentFile );
+    $output=null;
          switch (json_last_error()) {
-	        case JSON_ERROR_DEPTH:
-	            $output= 'get the maximum stack depth exceeded';
-	        break;
-	        
-	        case JSON_ERROR_STATE_MISMATCH:
-	            $output= 'underflow or the modes mismatch';
-	        break;
-	        
-	        case JSON_ERROR_CTRL_CHAR:
-	            $output= 'has an unexpected control character found';
-	        break;
-	        
-	        case JSON_ERROR_SYNTAX:
-	            $output= 'has a syntax error';
-	        break;
-	        
-	        case JSON_ERROR_UTF8:
-	            $output= 'none';
-	        break;
-	        
-	        case JSON_ERROR_NONE:
-				$output='none';
-				
-	        default:
-	            $output= 'has an unknown error';
-	        break;
-  		  }
-  		  
+            case JSON_ERROR_DEPTH:
+                $output= 'get the maximum stack depth exceeded';
+            break;
+            
+            case JSON_ERROR_STATE_MISMATCH:
+                $output= 'underflow or the modes mismatch';
+            break;
+            
+            case JSON_ERROR_CTRL_CHAR:
+                $output= 'has an unexpected control character found';
+            break;
+            
+            case JSON_ERROR_SYNTAX:
+                $output= 'has a syntax error';
+            break;
+            
+            case JSON_ERROR_UTF8:
+                $output= 'none';
+            break;
+            
+            case JSON_ERROR_NONE:
+                $output='none';
+                
+            default:
+                $output= 'has an unknown error';
+            break;
+            }
+            
         if ( $output != 'none' )
         {
             $message = 'The file "' . $file . '" '. $output;

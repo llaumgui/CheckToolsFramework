@@ -44,7 +44,7 @@ foreach ( $ct->findRecursiveFromArg() as $file )
     qatTestJson::checkCRLF( $testSuite, $file, $contentFile );
     qatTestJson::checkEncoding( $testSuite, $file, $contentFile );
     qatTestJson::checkBOM( $testSuite, $file, $contentFile );
-    qatTestJson::checkLastError($testSuite, $file, $contentFile);
+    qatTestJson::checkLastError( $testSuite, $file, $contentFile );
     
     $contentFile = null;
     $testSuite->finish();
