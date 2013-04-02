@@ -1,7 +1,7 @@
-/.buildpath
-/.project
+/.externalToolBuilders
 /.settings
 /vendor
-/.externalToolBuilders
+/.buildpath
 /.gitignore
+/.project
 /composer.lock
