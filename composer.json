@@ -6,7 +6,7 @@
         "php": ">=5.3.3",
         "symfony/class-loader": "2.2.*",
         "symfony/yaml": "2.2.*",  
-        "twig/twig": "1.12.*",
+        "twig/twig": "1.12.*"
     },
     "config": {
         "bin-dir": "bin"
