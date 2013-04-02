@@ -10,11 +10,11 @@
 /* Reactiver pour qatestyml via autoload*/
 if( "LOAD_SYMFONY" )
 {
-    include_once ''; __DIR__ . '/../vendor/autoload.php';
+    include_once __DIR__ . '/../vendor/autoload.php';
 }
 if( "LOAD_TWIG" )
 {
-    include_once '';  __DIR__ . '/../vendor/twig/twig/lib/Twig/Autoloader.php';
+    include_once __DIR__ . '/../vendor/twig/twig/lib/Twig/Autoloader.php';
 }
 use Symfony\Component\ClassLoader\UniversalClassLoader;
 
@@ -25,6 +25,8 @@ require_once __DIR__ . '/../vendor/symfony/class-loader/Symfony/Component/ClassL
 
 $loader = new UniversalClassLoader();
 $loader->register();
+$classLoader = new \Doctrine\Common\ClassLoader( 'DoctrineExtensions', "/../vendor/doctrine/" );
+$classLoader->register();
 
 
 /*$loader->registerNamespaces(array(
