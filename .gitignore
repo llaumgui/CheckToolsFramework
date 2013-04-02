@@ -3,3 +3,5 @@
 /.settings
 /vendor
 /.externalToolBuilders
+/.gitignore
+/composer.lock

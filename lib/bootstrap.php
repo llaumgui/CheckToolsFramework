@@ -25,15 +25,6 @@ require_once __DIR__ . '/../vendor/symfony/class-loader/Symfony/Component/ClassL
 
 $loader = new UniversalClassLoader();
 $loader->register();
-$classLoader = new \Doctrine\Common\ClassLoader( 'DoctrineExtensions', "/../vendor/doctrine/" );
-$classLoader->register();
-
-
-/*$loader->registerNamespaces(array(
-    'Yaml' , __DIR__.'/../vendor/symfony/yaml/',
-));*/
-//$loader->registerNamespace('Yaml', __DIR__.'/../vendor/symfony/yaml');
-
 
 
 /*
