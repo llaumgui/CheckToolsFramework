@@ -8,6 +8,9 @@
  * @copyright Copyright (C) 2012 Guillaume Kulakowski and contributors
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0
  */
+define( "LOAD_TWIG", false );
+define( "LOAD_SYMFONY", false );
+
 
 require dirname( __FILE__ ) . '/../lib/bootstrap.php'; // Packagers "sed" it !
 
