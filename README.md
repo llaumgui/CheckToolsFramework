@@ -15,6 +15,11 @@ QATools features
  * Check encoding and detec non UTF-8.
  * Check BOM in files.
  * Check template syntaxe.
+ * Check JSON syntaxe
+  
+ * //For this one you just need to run "composer install" in the top of the project 
+ * Check YML syntaxe
+ * Check Symfony template files (.twig)
 
 Continuous integration
 ======================

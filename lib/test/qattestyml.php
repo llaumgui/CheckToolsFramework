@@ -1,6 +1,6 @@
 <?php
 /**
- * File containing the qatTestXml class.
+ * File containing the qatTestYml class.
  *
  * @version //autogentag//
  * @package QATools
@@ -8,40 +8,45 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0
  */
 
+use Symfony\Component\Yaml\Yaml;
 /**
- * The qatTestXml class.
+ * The qatTestYml class.
  *
- * Provide tests for xml file.
+ * Provide tests for php file.
  *
  * @package QATools
  * @version //autogentag//
  */
-class qatTestXml extends qatTest
+class qatTestYml extends qatTest
 {
 
     /**
-     * Check if XML is valid
+     * Check if YML is valid
      *
      * @param qatJunitXMLTestSuite $testSuite
      * @param string $file
-     * @param string $contentFile
+     * @param string $yml
      */
-    public static function checkValidity( qatJunitXMLTestSuite &$testSuite, $file, &$contentFile )
+    public static function checkValidity( qatJunitXMLTestSuite &$testSuite, $file , $yml )
     {
         $ct = qatConsoleTools::getInstance();
 
         $checkValidity = $testSuite->addTest();
-        $checkValidity->setName( 'Check if XML is valid' );
+        $checkValidity->setName( 'Check if YML is valid' );
         $checkValidity->setFile( $file );
         $checkValidity->setAssertions( 1 );
-
-        if ( !@simplexml_load_string( $output ) )
+        
+        try 
         {
-            $message = 'The file "' . $file . '" has a invalid XML syntaxe".';
-            $checkValidity->addFaillure( 'XML syntaxe', $message );
+            Yaml::parse( $yml );
+        }
+        catch (Exception $e) 
+        {
+            $message = $e->getMessage();
+            $checkValidity->addFaillure( 'YML', $message );
             $ct->output->outputLine( $message, 'error' );
         }
-
+        
         $checkValidity->finish();
     }
 }

@@ -20,7 +20,7 @@ class qatTestEztpl extends qatTest
 {
 
     /**
-     * Check if is there a line after the final PHP close tag
+     * Check if is any error in eZ Publish templates file.
      *
      * @param qatJunitXMLTestSuite $testSuite
      * @param string $file

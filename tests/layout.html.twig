@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Mappy{% endblock %}</title>
+    {% block meta %}{% endblock %}
+    {% stylesheets filter='?yui_css'
+        '@MappySiteBundle/Resources/public/css/html5reset-1.6.1.css'
+        '@MappySiteBundle/Resources/public/css/layout.css'
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all" />
+    {% endstylesheets %}
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <!--[if lt IE 9]>
+        <script src="{{ asset('bundle/mappysite/js/html5shiv.js') }}/"></script>
+    <![endif]-->
+    {% javascripts filter='?closure'
+        '@MappySiteBundle/Resources/public/js/jquery-1.9.1.min.js'
+        '@MappySiteBundle/Resources/public/js/documentready.js'
+        '@MappySiteBundle/Resources/public/js/misc.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+block javascripts %}{% endblock %}
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block body %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="flash-message">
+                <em>Notice</em>: {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endblock %}
+    {% block javascripts_bottom %}{% endblock %}
+
