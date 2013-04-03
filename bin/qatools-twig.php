@@ -1,26 +1,20 @@
-#!/usr/bin/env php
 <?php
 /**
- * File containing the qatools-eztpl file.
+ * File containing the qatools-twig file.
  *
  * @version //autogentag//
  * @package QATools
  * @copyright Copyright (C) 2012 Guillaume Kulakowski and contributors
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0
  */
-
-// Load eZ Publish
-if ( !@include 'autoload.php' )
-{
-    die ( 'Launch this script from eZ Publish root directory like : "../../check-tpl-files.php -o ../../output.xml extension"' );
-}
+define( "LOAD_TWIG", true );
 
 require dirname( __FILE__ ) . '/../lib/bootstrap.php'; // Packagers "sed" it !
 
 // Init ConsoleTools
 $ct = qatConsoleTools::getInstance();
 $ct->addOptionOutput();
-$ct->addOptionIncludeFilters( array( '@\.tpl$@' ) );
+$ct->addOptionIncludeFilters( array( '@\.twig$@' ) );
 $ct->addOptionExcludeFilters();
 $ct->addOptionAllowCRLF();
 $ct->addOptionAllowNotUTF8();
@@ -28,33 +22,32 @@ $ct->addOptionAllowBOM();
 $ct->addOptionAllowLineAfterTag();
 $ct->addArgSource();
 
+
 // Process
 $ct->process();
 $ct->output->outputLine();
-
-
+        
 // Go tests
-$tpl = eZTemplate::factory();
 $testSuites = qatJunitXMLTestSuites::getInstance();
 $mainTestSuites = $testSuites->addTestSuite();
 
 foreach ( $ct->findRecursiveFromArg() as $file )
 {
     $ct->output->outputLine( $file );
-
-    $testSuite = $testSuites->addTestSuite();
-    $testSuite->setName( "Check eZ Publish templates: {$file}" );
+    $testSuite = $mainTestSuites->addTestSuite();
+    $testSuite->setName( "Check TWIG files: {$file}" );
     $testSuite->setFile( $file );
 
     $contentFile = file_get_contents( $file );
 
-    qatTestEztpl::checkCRLF( $testSuite, $file, $contentFile );
-    qatTestEztpl::checkEncoding( $testSuite, $file, $contentFile );
-    qatTestEztpl::checkBOM( $testSuite, $file, $contentFile );
-    qatTestEztpl::checkTemplateSyntaxe( $testSuite, $file, $contentFile, $tpl );
+    qatTestTwig::checkCRLF( $testSuite, $file, $contentFile );
+    qatTestTwig::checkEncoding( $testSuite, $file, $contentFile );
+    qatTestTwig::checkBOM( $testSuite, $file, $contentFile );
+    
+    qatTestTwig::checkTemplateSyntaxe( $testSuite, $file, $contentFile );
 
     $contentFile = null;
-    $testSuite->finish( $mainTestSuites );
+    $testSuite->finish();
 }
 $mainTestSuites->finish();
 

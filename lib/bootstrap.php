@@ -7,6 +7,25 @@
  * @copyright Copyright (C) 2012 Guillaume Kulakowski and contributors
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0
  */
+/* Reactiver pour qatestyml via autoload*/
+if( "LOAD_SYMFONY" )
+{
+    include_once __DIR__ . '/../vendor/autoload.php';
+}
+if( "LOAD_TWIG" )
+{
+    include_once __DIR__ . '/../vendor/twig/twig/lib/Twig/Autoloader.php';
+}
+use Symfony\Component\ClassLoader\UniversalClassLoader;
+
+/*
+ * Load Symfony
+*/
+require_once __DIR__ . '/../vendor/symfony/class-loader/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+
+$loader = new UniversalClassLoader();
+$loader->register();
+
 
 /*
  * Load eZ Components
