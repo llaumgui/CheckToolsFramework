@@ -20,6 +20,7 @@ $ct->addOptionExcludeFilters();
 $ct->addOptionAllowCRLF();
 $ct->addOptionAllowNotUTF8();
 $ct->addOptionAllowBOM();
+$ct->addOptionAllowLineAfterTag();
 $ct->addArgSource();
 
 // Process

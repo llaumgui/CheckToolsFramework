@@ -54,4 +54,5 @@ $mainTestSuites->finish();
 $ct->output->outputLine( "\n" . 'Checked.' );
 
 file_put_contents( $ct->options['output']->value, $testSuites->getXML() );
+
 ?>

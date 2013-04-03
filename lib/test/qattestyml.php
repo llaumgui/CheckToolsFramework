@@ -8,12 +8,6 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0
  */
 
-
-
-/*  Pour version autoload
- *    use Symfony\Component\Yaml\Yaml;
- */
-
 use Symfony\Component\Yaml\Yaml;
 /**
  * The qatTestYml class.
@@ -44,7 +38,7 @@ class qatTestYml extends qatTest
         
         try 
         {
-            Yaml::parse( $yml ); //try to parse 
+            Yaml::parse( $yml );
         }
         catch (Exception $e) 
         {
