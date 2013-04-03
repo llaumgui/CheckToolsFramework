@@ -15,11 +15,33 @@ QATools features
  * Check encoding and detec non UTF-8.
  * Check BOM in files.
  * Check template syntaxe.
+ * Check if file don't finish by blank line
+* Check for JSON Files (.json):
+ * Check line delimiter (CRLF VS LF).
+ * Check encoding and detec non UTF-8.
+ * Check BOM in files.
+ * Check if file don't finish by blank line
  * Check JSON syntaxe
-  
- * //For this one you just need to run "composer install" in the top of the project 
+ * Check JSON error 
+* Check for XML Files (.xml) : 
+ * Check line delimiter (CRLF VS LF).
+ * Check encoding and detec non UTF-8.
+ * Check BOM in files.
+ * Check if file don't finish by blank line
+ * Check XML syntaxe
+* Check for YAML Files (.yml)
+ * Check line delimiter (CRLF VS LF).
+ * Check encoding and detec non UTF-8.
+ * Check BOM in files.
+ * Check if file don't finish by blank line
  * Check YML syntaxe
- * Check Symfony template files (.twig)
+ * Check YML error
+* Check for Syfony Template files (.twig)
+ * Check line delimiter (CRLF VS LF).
+ * Check encoding and detec non UTF-8.
+ * Check BOM in files.
+ * Check if file don't finish by blank line
+ * Check TWIG syntaxe
 
 Continuous integration
 ======================
