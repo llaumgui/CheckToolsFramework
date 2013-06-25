@@ -8,6 +8,7 @@
  * @copyright Copyright (C) 2012 Guillaume Kulakowski and contributors
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0
  */
+
 define( "LOADSYMFONY", true );
 require dirname( __FILE__ ) . '/../lib/bootstrap.php'; // Packagers "sed" it !
 
@@ -46,7 +47,7 @@ foreach ( $ct->findRecursiveFromArg() as $file )
     qatTestYml::checkEncoding( $testSuite, $file, $contentFile );
     qatTestYml::checkBOM( $testSuite, $file, $contentFile );
     qatTestYml::checkValidity( $testSuite, $file, $contentFile );
-    
+
     $contentFile = null;
     $testSuite->finish();
 }

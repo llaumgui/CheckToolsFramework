@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * File containing the qatools-twig file.
@@ -7,8 +8,8 @@
  * @copyright Copyright (C) 2012 Guillaume Kulakowski and contributors
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0
  */
-define( "LOAD_TWIG", true );
 
+define( "LOAD_TWIG", true );
 require dirname( __FILE__ ) . '/../lib/bootstrap.php'; // Packagers "sed" it !
 
 // Init ConsoleTools
@@ -26,7 +27,7 @@ $ct->addArgSource();
 // Process
 $ct->process();
 $ct->output->outputLine();
-        
+
 // Go tests
 $testSuites = qatJunitXMLTestSuites::getInstance();
 $mainTestSuites = $testSuites->addTestSuite();
@@ -43,7 +44,7 @@ foreach ( $ct->findRecursiveFromArg() as $file )
     qatTestTwig::checkCRLF( $testSuite, $file, $contentFile );
     qatTestTwig::checkEncoding( $testSuite, $file, $contentFile );
     qatTestTwig::checkBOM( $testSuite, $file, $contentFile );
-    
+
     qatTestTwig::checkTemplateSyntaxe( $testSuite, $file, $contentFile );
 
     $contentFile = null;
