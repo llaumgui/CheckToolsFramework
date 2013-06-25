@@ -1,7 +1,7 @@
 {
     "menu": {
         "id": "file",
-        "value": "File"
+        "value": "File",
         "popup": {
             "menuitem": [
                 { "value": "New", "onclick": "CreateNewDoc()" },

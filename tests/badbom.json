@@ -1,14 +1,13 @@
-﻿var courses = {
- "fruits": [
-   { "kiwis": 3,
-     "mangues": 4,
-     "pommes": null
-   },
-   { "panier": true },
- ],
- "legumes":
-   { "patates": "amandine",
-     "figues": "de barbarie",
-     "poireaux": false
-   }
-};
+﻿{
+    "menu": {
+        "id": "file",
+        "value": "File",
+        "popup": {
+            "menuitem": [
+                { "value": "New", "onclick": "CreateNewDoc()" },
+                { "value": "Open", "onclick": "OpenDoc()" },
+                { "value": "Close", "onclick": "CloseDoc()" }
+            ]
+        }
+    }
+}
