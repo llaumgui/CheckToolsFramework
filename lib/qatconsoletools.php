@@ -15,6 +15,8 @@
  *
  * @package QATools
  * @version //autogentag//
+ *
+ * @SuppressWarnings(PHPMD.TooManyMethods) Central class.
  */
 class qatConsoleTools
 {
