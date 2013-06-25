@@ -35,7 +35,7 @@ class qatTestXml extends qatTest
         $checkValidity->setFile( $file );
         $checkValidity->setAssertions( 1 );
 
-        if ( !@simplexml_load_string( $output ) )
+        if ( !@simplexml_load_string( $contentFile ) )
         {
             $message = 'The file "' . $file . '" has a invalid XML syntaxe".';
             $checkValidity->addFaillure( 'XML syntaxe', $message );
