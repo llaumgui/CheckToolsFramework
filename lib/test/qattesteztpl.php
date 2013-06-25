@@ -24,11 +24,11 @@ class qatTestEztpl extends qatTest
      *
      * @param qatJunitXMLTestSuite $testSuite
      * @param string $file
-     * @param string $contentFile
      * @param eZTemplate $tpl
      */
-    public static function checkTemplateSyntaxe( qatJunitXMLTestSuite &$testSuite, $file, &$contentFile, eZTemplate &$tpl )
+    public static function checkTemplateSyntaxe( qatJunitXMLTestSuite &$testSuite, $file, eZTemplate &$tpl )
     {
+        $ct = qatConsoleTools::getInstance();
         $cfg = ezcConfigurationManager::getInstance();
         $toSkip = $cfg->getSetting( 'eztpl', 'Validator', 'ErrorsToSkip' );
 

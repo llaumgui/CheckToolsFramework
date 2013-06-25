@@ -51,7 +51,7 @@ foreach ( $ct->findRecursiveFromArg() as $file )
     qatTestEztpl::checkCRLF( $testSuite, $file, $contentFile );
     qatTestEztpl::checkEncoding( $testSuite, $file, $contentFile );
     qatTestEztpl::checkBOM( $testSuite, $file, $contentFile );
-    qatTestEztpl::checkTemplateSyntaxe( $testSuite, $file, $contentFile, $tpl );
+    qatTestEztpl::checkTemplateSyntaxe( $testSuite, $file, $tpl );
 
     $contentFile = null;
     $testSuite->finish( $mainTestSuites );
