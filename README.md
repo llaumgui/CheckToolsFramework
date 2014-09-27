@@ -14,7 +14,3 @@ QATools features
 * Check syntax for Twig templates files (.twig)
 * Check XML syntax.
 * Check YML syntax.
-
-Continuous integration
-======================
-QATools is under continuous integration: [http://ci.llaumgui.com/job/QATools/](http://ci.llaumgui.com/job/QATools/)
