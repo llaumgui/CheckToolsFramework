@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<testsuites>
+	<testsuite tests="16" errors="0" failures="6" time="0.12509894371033">
+		<testsuite name="Check XML files: ../tests/\badbom.xml" file="../tests/\badbom.xml" tests="4" errors="0" failures="2" time="0.084285974502563">
+			<testcase name="Check file line delimiter (CRLF)" file="../tests/\badbom.xml" assertions="1" time="0.00024509429931641"/>
+			<testcase name="Check file encoding" file="../tests/\badbom.xml" assertions="1" time="7.4863433837891E-5"/>
+			<testcase name="Check file BOM" file="../tests/\badbom.xml" assertions="1" time="0.00032401084899902">
+				<failure type="BOM">The file "../tests/\badbom.xml" has a BOM.</failure>
+			</testcase>
+			<testcase name="Check if XML is valid" file="../tests/\badbom.xml" assertions="1" time="0.020348072052002">
+				<failure type="XML syntaxe">The file "../tests/\badbom.xml" has a invalid XML syntaxe".</failure>
+			</testcase>
+		</testsuite>
+	</testsuite>
+</testsuites>

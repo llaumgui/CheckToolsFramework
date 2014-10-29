@@ -11,7 +11,6 @@
 
 require dirname( __FILE__ ) . '/../lib/bootstrap.php'; // Packagers "sed" it !
 
-
 // Init ConsoleTools
 $ct = qatConsoleTools::getInstance();
 $ct->addOptionOutput();
