@@ -16,7 +16,12 @@
   }],
   "require": {
     "php": ">=5.3.3",
-    "llaumgui/junit-xml" : "dev-develop"
+    "symfony/config": "~2.7",
+    "symfony/console": "~2.7",
+    "symfony/dependency-injection": "~2.7",
+    "symfony/finder": "~2.7",
+    "symfony/yaml": "~2.7",
+    "llaumgui/junit-xml" : "dev-master"
   },
   "require-dev": {
   },

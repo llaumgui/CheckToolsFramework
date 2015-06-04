@@ -1,0 +1,48 @@
+#!/usr/bin/env php
+<?php
+/*
+ * This file is part of the CheckToolsFramework package.
+ *
+ * (c) Guillaume Kulakowski <guillaume@kulakowski.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Llaumgui\CheckToolsFramework\DependencyInjection\Extension;
+
+if (!ini_get('date.timezone')) {
+    ini_set('date.timezone', 'UTC');
+}
+
+foreach (array(__DIR__ . '/../vendor/autoload.php') as $file) {
+    if (file_exists($file)) {
+        define('CTF_COMPOSER_INSTALL', $file);
+        break;
+    }
+}
+unset($file);
+
+if (!defined('CTF_COMPOSER_INSTALL')) {
+    fwrite(STDERR,
+        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
+        'wget http://getcomposer.org/composer.phar' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL
+    );
+    die(1);
+}
+require CTF_COMPOSER_INSTALL;
+
+
+/*
+ * Build application
+ */
+$container = new ContainerBuilder();
+$extension = new Extension();
+$container->registerExtension($extension);
+$container->loadFromExtension($extension->getAlias());
+$container->compile();
+
+// Run Cli !
+$container->get('ctf.cli')->run();
