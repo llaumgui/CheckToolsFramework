@@ -1,20 +1,19 @@
 parameters:
-    service.ctf_console.class:      "Llaumgui\CheckToolsFramework\Console\Application"
-    service.ctf_cli.class:          "Llaumgui\CheckToolsFramework\Cli"
-    service.ctf_helpere_bom.class:  "Llaumgui\CheckToolsFramework\Helper\Bom"
+    service.ctf_console.class:          "Llaumgui\CheckToolsFramework\Console\Application"
+    service.ctf_cli.class:              "Llaumgui\CheckToolsFramework\Cli"
+    service.ctf_checktool_bom.class:    "Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool"
 
 
 services:
     ctf.console:
         class:      "%service.ctf_console.class%"
+        arguments:  ["%check_tools_framework.name%", "%check_tools_framework.version%"]
         calls:
              - [setContainer,   ["@service_container"]]
-             - [setName,        ["CheckToolsFramework"]]
-             - [setVersion,     ["0.1.0"]]
 
     ctf.cli:
         class:      "%service.ctf_cli.class%"
         arguments:  ["@ctf.console", "%check_tools_framework.default_commands%"]
 
-    ctf.helper_bom:
-        class:      "%service.ctf_helpere_bom.class%"
+    ctf.checktool_bom:
+        class:      "%service.ctf_checktool_bom.class%"

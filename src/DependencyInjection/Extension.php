@@ -37,6 +37,8 @@ class Extension implements ExtensionInterface, PrependExtensionInterface
         $config = $processor->processConfiguration($configuration, $configs);
 
         $container->setParameter('check_tools_framework.default_commands', $config['default_commands']);
+        $container->setParameter('check_tools_framework.name', 'CheckToolsFramework');
+        $container->setParameter('check_tools_framework.version', '0.1.0');
     }
 
 

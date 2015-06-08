@@ -10,14 +10,15 @@
 
 namespace Llaumgui\CheckToolsFramework\Command;
 
-use Llaumgui\CheckToolsFramework\Command\CheckHelper;
+use Llaumgui\CheckToolsFramework\Command\CheckToolsCommandAware;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Llaumgui\JunitXml\JunitXmlTestSuites;
 
 /**
- * The CheckBom class.
+ * The BomCommand class.
  */
-class CheckBom extends CheckHelper
+class BomCommand extends CheckToolsCommandAware
 {
     /**
      * Configures the current command.
@@ -59,6 +60,31 @@ class CheckBom extends CheckHelper
     {
         parent::execute($input, $output);
 
-        $this->getApplication()->getContainer()->get('ctf.helper_bom')->check($this->getFinder());
+        $checkTool = $this->getApplication()->getContainer()->get('ctf.checktool_bom');
+
+        // Init Junit log
+        $testSuites = new JunitXmlTestSuites('Check BOM.');
+        $testSuite = $testSuites->addTestSuite('Check BOM in files.');
+
+        // Find BOM in files in Finder
+        foreach ($this->getFinder() as $file) {
+            $check = $checkTool->doCheck($file);
+
+            // Create TestCase
+            $testCase = $testSuite->addTest($check->getDescription());
+            $testCase->setClassName($file->getRelativePathname());
+            $testCase->incAssertions();
+
+            if (!$check->getResult()) {
+                $output->writeln($check->getDescription() . ': <error>Failed</error>');
+                $testCase->addError($check->getMessage());
+            } elseif ($check->getResult() && $output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+                $output->writeln($check->getDescription() . ': <info>Succeeded</info>');
+            }
+            $testCase->finish();
+        }
+        $testSuite->finish();
+
+        $this->writeOutput($testSuites->getXml());
     }
 }

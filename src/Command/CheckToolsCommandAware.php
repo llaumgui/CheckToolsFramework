@@ -16,12 +16,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * Check class with all default configuration shared between each CheckClass.
+ * Check class with all default configuration shared between each CheckToolsCommand.
  * Expose also some check helpers.
  */
-class CheckHelper extends Command
+abstract class CheckToolsCommandAware extends Command
 {
     /**
      * @var array
@@ -31,6 +32,10 @@ class CheckHelper extends Command
      * @var string
      */
     protected $pathPaternExclusion;
+    /**
+     * @var string
+     */
+    protected $outputFile;
     /**
      * @var string
      */
@@ -67,6 +72,13 @@ class CheckHelper extends Command
                 InputOption::VALUE_REQUIRED,
                 'File name pattern to check (can use regular expression)',
                 $this->fileNamePatern
+            )
+            ->addOption(
+                '--output',
+                '-o',
+                InputOption::VALUE_OPTIONAL,
+                'Junit XML ouput',
+                $this->outputFile
             )
             ->addOption(
                 '--filename-exclusion',
@@ -108,13 +120,14 @@ class CheckHelper extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->path = $input->getArgument('path');
+        $this->outputFile = $input->getOption('output');
         $this->pathPaternExclusion = $input->getOption('path-exclusion');
         $this->fileNamePatern = $input->getOption('filename');
         $this->fileNamePaternExclusion = $input->getOption('filename-exclusion');
         $this->ignoreVcs = ($input->getOption('noignore-vcs') ? false : true);
     }
 
-    
+
     /**
      * Get list of files.
      *
@@ -137,5 +150,21 @@ class CheckHelper extends Command
         }
 
         return $finder;
+    }
+
+
+    /**
+     *
+     *
+     * @param string $content
+     */
+    public function writeOutput($content)
+    {
+        $fs = new Filesystem();
+        try {
+            $fs->dumpFile($this->outputFile, $content);
+        } catch (IOExceptionInterface $e) {
+            echo 'Error writing in ' . $this->outputFile;
+        }
     }
 }
