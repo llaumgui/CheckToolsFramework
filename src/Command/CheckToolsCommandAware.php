@@ -160,7 +160,7 @@ abstract class CheckToolsCommandAware extends Command
 
 
     /**
-     *
+     * Output test result.
      *
      * @param string $content
      */
