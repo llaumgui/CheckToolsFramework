@@ -10,10 +10,10 @@
     "source": "https://github.com/llaumgui/CheckToolsFramework"
   },
   "authors": [{
-    "name": "Guillaume Kulakowski",
-    "email": "guillaume@kulakowski.fr",
-    "homepage": "http://blog.kulakowski.fr"
-  }],
+      "name": "Guillaume Kulakowski",
+      "email": "guillaume@kulakowski.fr",
+      "homepage": "http://blog.kulakowski.fr"
+    }],
   "require": {
     "php": ">=5.3.3",
     "symfony/config": "~2.7",
@@ -21,9 +21,10 @@
     "symfony/dependency-injection": "~2.7",
     "symfony/finder": "~2.7",
     "symfony/yaml": "~2.7",
-    "llaumgui/junit-xml" : "dev-master"
+    "llaumgui/junit-xml": "dev-master"
   },
   "require-dev": {
+    "phpunit/phpunit": "^5.2"
   },
   "autoload": {
     "psr-4": {
