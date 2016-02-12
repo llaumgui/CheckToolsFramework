@@ -53,6 +53,10 @@ abstract class CheckToolsCommandAware extends Command
      * @var Symfony\Component\Finder\Finder
      */
     protected $finder;
+    /**
+     * @var Symfony\Component\Console\Output\OutputInterface;
+     */
+    protected $output;
 
 
     /**
@@ -126,6 +130,7 @@ abstract class CheckToolsCommandAware extends Command
         $this->fileNamePatern = $input->getOption('filename');
         $this->fileNamePaternExclusion = $input->getOption('filename-exclusion');
         $this->ignoreVcs = ($input->getOption('noignore-vcs') ? false : true);
+        $this->output = $output;
     }
 
 
@@ -161,11 +166,13 @@ abstract class CheckToolsCommandAware extends Command
      */
     public function writeOutput($content)
     {
-        $fs = new Filesystem();
-        try {
-            $fs->dumpFile($this->outputFile, $content);
-        } catch (IOExceptionInterface $e) {
-            echo 'Error writing in ' . $this->outputFile;
+        if (!empty($this->outputFile)) {
+            $fs = new Filesystem();
+            try {
+                $fs->dumpFile($this->outputFile, $content);
+            } catch (IOExceptionInterface $e) {
+                echo 'Error writing in ' . $this->outputFile;
+            }
         }
     }
 }

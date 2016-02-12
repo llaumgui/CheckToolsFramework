@@ -77,10 +77,10 @@ class BomCommand extends CheckToolsCommandAware
             $testCase->incAssertions();
 
             if (!$check->getResult()) {
-                $output->writeln($check->getDescription() . ': <error>Failed</error>');
+                $this->output->writeln($check->getDescription() . ': <error>Failed</error>');
                 $testCase->addError($check->getMessage());
-            } elseif ($check->getResult() && $output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-                $output->writeln($check->getDescription() . ': <info>Succeeded</info>');
+            } elseif ($check->getResult() && $this->output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+                $this->output->writeln($check->getDescription() . ': <info>Succeeded</info>');
             }
             $testCase->finish();
         }
