@@ -3,7 +3,7 @@
 /*
  * This file is part of the CheckToolsFramework package.
  *
- * (c) Guillaume Kulakowski <guillaume@kulakowski.fr>
+ * Copyright (C) 2015-2016 Guillaume Kulakowski <guillaume@kulakowski.fr>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -25,8 +25,7 @@ foreach (array(__DIR__ . '/../vendor/autoload.php') as $file) {
 unset($file);
 
 if (!defined('CTF_COMPOSER_INSTALL')) {
-    fwrite(STDERR,
-        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
+    fwrite(STDERR, 'You need to set up the project dependencies using the following commands:' . PHP_EOL .
         'wget http://getcomposer.org/composer.phar' . PHP_EOL .
         'php composer.phar install' . PHP_EOL
     );
