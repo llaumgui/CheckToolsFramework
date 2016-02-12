@@ -1,10 +1,10 @@
 #!/bin/sh
 
-# Install APiGen
-composer require apigen/apigen apigen/theme-bootstrap:1.1.2
+# Get ApiGen.phar
+wget http://www.apigen.org/apigen.phar
 
 # Generate Api
-vendor/bin/apigen generate
+php apigen.phar generate
 
 # Set identity
 git config --global user.email "travis@travis-ci.org"
