@@ -19,12 +19,10 @@ before_install:
 before_script:
   # Install require & require-dev
   - composer install --prefer-source
-  # Install build tools but no dev tools
-  - composer require squizlabs/php_codesniffer codeclimate/php-test-reporter:dev-master
 
 script:
   #- phpunit --configuration phpunit.xml.dist --coverage-text --coverage-clover build/logs/clover.xml
-  - ./vendor/bin/phpcs --standard=PSR2 src bin
+  - ./vendor/bin/phpcs
 
 after_script:
   # TestReporter seem desn't work with these version og PHP

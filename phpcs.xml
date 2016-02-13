@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="CTF">
+    <description>The coding standard for CheckToolsFramework</description>
+
+    <file>./src/</file>
+    <file>./bin/</file>
+    <exclude-pattern>*/Tests/*</exclude-pattern>
+    
+    <arg name="report" value="full"/>
+    <rule ref="PSR2"/>
+</ruleset>
+
