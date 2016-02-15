@@ -21,7 +21,7 @@ before_script:
   - composer install --prefer-source
 
 script:
-  #- phpunit --configuration phpunit.xml.dist --coverage-text --coverage-clover build/logs/clover.xml
+  - ./vendor/bin/phpunit --configuration phpunit.xml.dist --coverage-text --coverage-clover build/logs/clover.xml
   - ./vendor/bin/phpcs
 
 after_script:
