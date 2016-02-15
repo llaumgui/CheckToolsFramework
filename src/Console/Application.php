@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder as Container;
 
 /**
  * Application.
+ * @codeCoverageIgnore because only getters and setters.
  */
 class Application extends BaseApplication
 {

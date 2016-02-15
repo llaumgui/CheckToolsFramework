@@ -13,6 +13,7 @@ namespace Llaumgui\CheckToolsFramework\CheckTool;
 
 /**
  * CheckToolTest to be returned by each CheckTool.
+ * @codeCoverageIgnore because only getters and setters.
  */
 class CheckToolTest
 {
