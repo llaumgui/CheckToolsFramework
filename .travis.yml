@@ -28,8 +28,3 @@ after_script:
   - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then ./vendor/bin/test-reporter; fi
   # ApiGen generation
   - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then sh generate-api.sh; fi
-
-
-env:
-  global:
-    secure: T7Xj0FVBxRYYIqEPn08JgamrhW0Wk+9mrMjARfOHA88SjcjGg5e3c3A8mtIXFSmOwnidBBDx1UKh4ltmNXgsiu04qN1eP4cCzCNLGbiNR6QKy90AoOxqSWurRF8Z3VCABGajScuQcCbhcwCfd0nfMD0HVKCnkccMm3Ktrl7tadyQTI7xQUWKSYGv1f/Lv8xTVyszv3u2RnawDizOAOZpvt+b1404tMQVoa5zHh6bCHSfAD5nRAZpuJAphu3NuCJYn1/9pvAQxxXaE6uYxXsDloG6l17W18VfPo+DAZFrxemfJG3LpnlkyKyZV9eZJk+ne8b+QpzSz9i+t24d5H0KEB+enSIp0WAW4N6KUng/jNMGHZTD6/4iqLfuQCPlOzBRYAYvkPwf2sMRvV4h5PC5vsYxNSP5YM5Se+I+arMuUIBGTda8fVne1+9ybmsKgKb1jiSTdxh3eaQOkRAf9EyIElAAR7aViHes2AM3pSWEOjAwnE1DAGWKfp74UBR7X5MCgIBmq42q+ZcEhLurAGlgob1DJC4ErwUqpeUG8nT5e/EJmUwyn8yRC4h5PsMdI9+U+Xn4kHPQY3R3tO4lQ2yQ5RfDltTvsInFdFuNorq39DYIm9aSEfJryKIkDzx5XCm91L518zeZGjXG+8LN31neXofOoLjKDMaiR+mpqY3TMyg=
