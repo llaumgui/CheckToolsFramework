@@ -1,6 +1,9 @@
 ### ApiGen ###
 gh-pages
 
+### Couscous ###
+.couscous
+
 # Created by https://www.gitignore.io/api/netbeans,composer,symfony,composer
 
 ### NetBeans ###

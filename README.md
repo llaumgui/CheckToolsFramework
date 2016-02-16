@@ -4,17 +4,9 @@
 PHP library for building check tools.
 
 
-## Installation
-
-
-## API documentation
-See [CheckToolsFramework API Documentation](https://llaumgui.github.io/CheckToolsFramework/).
-
-
-## Usage
-
-
-## Write a TestTools
+## Documentation
+* For documentation, see [CheckToolsFramework documentation](https://llaumgui.github.io/CheckToolsFramework/).
+* For API documentation, see [CheckToolsFramework API documentation](https://llaumgui.github.io/CheckToolsFramework/apigen).
 
 
 ## License
