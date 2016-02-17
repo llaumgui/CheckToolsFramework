@@ -1,6 +1,6 @@
 source:
   - src
-destination: gh-pages
+destination: gh-pages/apigen
 
 templateTheme: bootstrap
 title: "CheckToolsFramework API Documentation (master)"

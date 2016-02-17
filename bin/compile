@@ -1,0 +1,68 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * This file is part of the CheckToolsFramework package.
+ *
+ * Copyright (C) 2015-2016 Guillaume Kulakowski <guillaume@kulakowski.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use Phine\Phar\Builder;
+use Phine\Phar\Stub;
+use Symfony\Component\Finder\Finder;
+
+define('BUILD_PATH', __DIR__ . '/../');
+define('ROOT_PATH', realpath(__DIR__ . '/..'));
+
+require_once ROOT_PATH . '/vendor/autoload.php';
+
+
+// Delete existing phar
+if (file_exists(BUILD_PATH . 'phpct.phar')) {
+    unlink(BUILD_PATH . 'phpct.phar');
+}
+
+// Create a new Phar in the same directory
+$builder = Builder::create(BUILD_PATH . 'phpct.phar');
+
+// Add the source files
+$builder->buildFromIterator(
+    Finder::create()
+        ->files()
+        ->name('*.php')
+        ->name('*.yml')
+        ->in(ROOT_PATH . '/src')
+        ->getIterator(),
+    ROOT_PATH
+);
+
+// Add the dependencies
+$builder->buildFromIterator(
+    Finder::create()
+        ->files()
+        ->name('*.php')
+        ->exclude(['Tests', 'tests', 'phpunit'])
+        ->in(ROOT_PATH . '/vendor')
+        ->getIterator(),
+    ROOT_PATH
+);
+
+$builder->addFile(ROOT_PATH . '/LICENSE.txt', 'LICENSE');
+
+$source = file_get_contents(ROOT_PATH . '/bin/phpct');
+$source = preg_replace('{^#!/usr/bin/env php\s*}', '', $source);
+$source = str_replace('<?php', '', $source);
+
+$builder->setStub(
+    Stub::create()
+        ->mapPhar('phpct.phar')
+        ->addSource($source)
+        ->getStub()
+);
+
+chmod(BUILD_PATH . '/phpct.phar', 0755);
+
+file_put_contents('phpct.version', sha1_file(BUILD_PATH .'phpct.phar'));
