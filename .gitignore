@@ -4,6 +4,11 @@ gh-pages
 ### Couscous ###
 .couscous
 
+### Phar ###
+phpct.phar
+phpct.version
+
+
 # Created by https://www.gitignore.io/api/netbeans,composer,symfony,composer
 
 ### NetBeans ###
