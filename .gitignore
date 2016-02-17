@@ -1,3 +1,7 @@
+### Bin ###
+!bin/compile
+!bin/phpct
+
 ### ApiGen ###
 gh-pages
 
@@ -27,7 +31,7 @@ composer.phar
 
 # Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-# composer.lock
+composer.lock
 
 
 ### Symfony ###
@@ -39,7 +43,7 @@ composer.phar
 
 # Cache and logs (Symfony3)
 /var/cache/*
-/var/logs/*
+/var/logs/*git add
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 
@@ -77,12 +81,3 @@ composer.phar
 /web/uploads/
 /web/css/
 /web/js/
-
-### Composer ###
-composer.phar
-/vendor/
-
-# Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-composer.lock
-
