@@ -26,5 +26,5 @@ script:
 
 after_script:
   - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then ./vendor/bin/test-reporter; fi
-  # Couscous and ApiGen generation
-  - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'develop' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then sh generate-doc.sh; fi
+  # Full Website generator
+  - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'develop' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then sh generate-website.sh; fi

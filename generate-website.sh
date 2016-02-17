@@ -17,7 +17,7 @@ php couscous.phar generate --target ${BUILD_PATH}
 php apigen.phar generate
 
 # Build Phar
-bin/compile
+./bin/compile
 mv phpct.phar ${BUILD_PATH}
 mv phpct.version ${BUILD_PATH}
 
