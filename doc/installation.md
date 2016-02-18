@@ -7,7 +7,7 @@ currentMenu: installation
 ## Requirements
 CheckToolsFramework requires PHP 5.5.9 or above on your machine.
 
-### Composer
+## Composer
 With [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx), run:
 
 ```
@@ -19,7 +19,7 @@ You can also add CheckToolsFrameworks as a dependency for a project with `php co
 Be aware that in order for CheckToolsFrameworks to be awesome it will install a good amount of other dependencies.
 If you rather have it self-contained, use the **Phar** method just below.
 
-### Phar
+## Phar
 Alternatively, you can download [phpct.phar](http://llaumgui.github.io/CheckToolsFramework/phpct.phar):
 
 ```bash
