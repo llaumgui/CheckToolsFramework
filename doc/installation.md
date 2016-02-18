@@ -11,10 +11,10 @@ CheckToolsFramework requires PHP 5.5.9 or above on your machine.
 With [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx), run:
 
 ```
-$ php composer.phar global require llaumgui/CheckToolsFramework
+$ php composer.phar global require llaumgui/check-tools-framework
 ```
 
-You can also add CheckToolsFrameworks as a dependency for a project with `php composer.phar require llaumgui/CheckToolsFrameworks`.
+You can also add CheckToolsFrameworks as a dependency for a project with `php composer.phar require llaumgui/check-tools-framework`.
 
 Be aware that in order for CheckToolsFrameworks to be awesome it will install a good amount of other dependencies.
 If you rather have it self-contained, use the **Phar** method just below.
