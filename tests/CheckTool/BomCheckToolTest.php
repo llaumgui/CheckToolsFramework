@@ -27,7 +27,7 @@ class BomCheckToolTest extends PhpUnitHelper
 
         // Get testing files
         $finder = new Finder();
-        $finder->files()->in($this->filesToTestPath);
+        $finder->files()->in(__DIR__ . '/../files');
 
         foreach ($finder as $file) {
             $check = $bomCheckTool->doCheck($file);

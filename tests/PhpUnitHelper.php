@@ -19,7 +19,7 @@ class PhpUnitHelper extends \PHPUnit_Framework_TestCase
     /**
      * @var string
      */
-    protected $filesToTestPath = __DIR__ . '/files';
+    protected $filesToTestPath = ;
 
     /**
      * getPrivateMethod
