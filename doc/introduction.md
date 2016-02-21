@@ -4,6 +4,19 @@ currentMenu: introduction
 
 # Introduction
 
-## What's CheckToolFramework is ?
+## What's CheckToolsFramework is ?
+CheckToolsFramework is a framework to build simples tests on multiple files. For exemple:
+* Be sur that all my files haven't BOM.
+* Validate all my XML files.
+* CheckToolsFramework is a framework because you can add your own checker.
+* etc.
 
-## What's CheckToolFramework isn't ?
+## What's CheckToolsFramework isn't ?
+CheckToolsFramework isn't:
+
+* A tool to build units tests.
+* A tool to build functionnals tests.
+* A checkstyle tool.
+
+## How I can use CheckToolsFramework
+Currently you can use CheckToolsFramework in command line. Next you will use CheckToolsFramework in [post-commit hook](https://git-scm.com/book/it/v2/Customizing-Git-Git-Hooks).

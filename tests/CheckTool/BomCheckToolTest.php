@@ -11,28 +11,27 @@
 
 namespace Tests\Llaumgui\CheckToolsFramework\CheckTool;
 
+use Tests\Llaumgui\CheckToolsFramework\PhpUnitHelper;
 use Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool;
 use Symfony\Component\Finder\Finder;
 
-/**
- * The service BomCheckTool.
- */
-class BomCheckToolTest extends \PHPUnit_Framework_TestCase {
+class BomCheckToolTest extends PhpUnitHelper
+{
 
     /**
      * Check if content has BOM.
      */
-    public function testDoCheck() {
-
+    public function testDoCheck()
+    {
         $bomCheckTool = new BomCheckTool();
 
         // Get testing files
         $finder = new Finder();
-        $finder->files()->in(__DIR__ . '/../files');
+        $finder->files()->in($this->filesToTestPath);
 
         foreach ($finder as $file) {
             $check = $bomCheckTool->doCheck($file);
-            if(strpos($file->getFileName(), "bom_ko") !== false) {
+            if (strpos($file->getFileName(), "bom_ko") !== false) {
                 $this->assertFalse($check->getResult());
             } else {
                 $this->assertTrue($check->getResult());
@@ -41,5 +40,4 @@ class BomCheckToolTest extends \PHPUnit_Framework_TestCase {
             $this->assertInstanceOf('Llaumgui\CheckToolsFramework\CheckTool\CheckToolTest', $check);
         }
     }
-
 }
