@@ -2,7 +2,7 @@ template:
     # Name of the directory containing the website template (default is "website")
     #directory: website
     # Or if you are using a remote template, you can set the Git URL
-    url: https://github.com/CouscousPHP/Template-Light
+    url: https://github.com/CouscousPHP/Template-Dark
     # Name of the index file (default is "README.md")
     index: README.md
 
@@ -40,35 +40,47 @@ github:
     user: llaumgui
     repo: CheckToolsFramework
 
-subTitle: A framework to build check tests.
+subTitle: A framework for building check tools.
 
 # The left menu bar
 menu:
-    items:
-        introduction:
-            text: Introduction
-            relativeUrl: doc/introduction.html
-        installation:
-            text: Installation
-            relativeUrl: doc/installation.html
-        usage:
-            text: Usage
-            relativeUrl: doc/usage.html
-        builtin_test:
-            text: Built in tests
-            relativeUrl: doc/builtin_test.html
-        write_my_own:
-            text: Write my own test
-            relativeUrl: doc/write_my_own.html
-        apigen:
-            text: "<span class=\"fa fa-code\"></span> API documentation"
-            relativeUrl: apigen
-        github:
-            text: "<span class=\"fa fa-github\"></span> GitHub repository"
-            absoluteUrl: https://github.com/llaumgui/CheckToolsFramework
-        linkedin:
-            text: "<span class=\"fa fa-linkedin\"></span> My LinkedIn profil"
-            absoluteUrl: https://www.linkedin.com/in/guillaumekulakowski
-        myblog:
-            text: "<span class=\"fa fa-user\"></span> My blog"
-            absoluteUrl: http://blog.kulakowski.fr
+    sections:
+        main:
+            name: Main documentation
+            items:
+                introduction:
+                    text: Introduction
+                    relativeUrl: doc/introduction.html
+                installation:
+                    text: Installation
+                    relativeUrl: doc/installation.html
+                usage:
+                    text: Usage
+                    relativeUrl: doc/usage.html
+                builtin_test:
+                    text: Built in tests
+                    relativeUrl: doc/builtin_test.html
+                write_my_own:
+                    text: Write my own test
+                    relativeUrl: doc/write_my_own.html
+        Code:
+            name: Code
+            items:
+                coverage:
+                    text: "<span class=\"fa fa-file-code-o\"></span> Code coverage"
+                    relativeUrl: coverage
+                apigen:
+                    text: "<span class=\"fa fa-code\"></span> API documentation"
+                    relativeUrl: apigen
+                github:
+                    text: "<span class=\"fa fa-github\"></span> GitHub repository"
+                    absoluteUrl: https://github.com/llaumgui/CheckToolsFramework
+        about_me:
+            name: About me
+            items:
+                linkedin:
+                    text: "<span class=\"fa fa-linkedin\"></span> My LinkedIn profil"
+                    absoluteUrl: https://www.linkedin.com/in/guillaumekulakowski
+            myblog:
+                text: "<span class=\"fa fa-user\"></span> My blog"
+                absoluteUrl: http://blog.kulakowski.fr

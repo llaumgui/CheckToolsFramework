@@ -16,6 +16,7 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 /**
  * The CommandConfiguration class.
+ * @codeCoverageIgnore because tested by functionnals tests.
  */
 class CommandConfiguration implements ConfigurationInterface
 {

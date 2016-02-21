@@ -20,6 +20,7 @@ use Symfony\Component\Config\Definition\Processor;
 
 /**
  * The Extension class.
+ * @codeCoverageIgnore because tested by functionnals tests.
  */
 class Extension implements ExtensionInterface, PrependExtensionInterface
 {

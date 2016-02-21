@@ -1,6 +1,7 @@
 #!/bin/sh
 
 BUILD_PATH=gh-pages
+COVERAGE_PATH=build/coverage
 
 # Cleanup gh-pages
 rm -rf ${BUILD_PATH}
@@ -20,6 +21,9 @@ php apigen.phar generate
 ./bin/compile
 mv phpct.phar ${BUILD_PATH}
 mv phpct.version ${BUILD_PATH}
+
+# Add coverage
+mv ${COVERAGE_PATH} ${BUILD_PATH}
 
 # Set identity
 git config --global user.email "travis@travis-ci.org"
