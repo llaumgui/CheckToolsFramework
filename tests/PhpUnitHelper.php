@@ -17,11 +17,6 @@ namespace Tests\Llaumgui\CheckToolsFramework;
 class PhpUnitHelper extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var string
-     */
-    protected $filesToTestPath = ;
-
-    /**
      * getPrivateMethod
      *
      * @param   object $instance    Instance of the class to reflect.
