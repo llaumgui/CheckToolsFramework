@@ -2,7 +2,7 @@ template:
     # Name of the directory containing the website template (default is "website")
     #directory: website
     # Or if you are using a remote template, you can set the Git URL
-    url: https://github.com/CouscousPHP/Template-ReadTheDocs
+    url: https://github.com/CouscousPHP/Template-Light
     # Name of the index file (default is "README.md")
     index: README.md
 
@@ -40,7 +40,7 @@ github:
     user: llaumgui
     repo: CheckToolsFramework
 
-subTitle: This is a great project.
+subTitle: A framework to build check tests.
 
 # The left menu bar
 menu:
