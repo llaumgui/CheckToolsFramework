@@ -11,16 +11,14 @@
 
 namespace Tests\Llaumgui\CheckToolsFramework\Command;
 
+use Tests\Llaumgui\CheckToolsFramework\PhpUnitHelper;
 use Llaumgui\CheckToolsFramework\Console\Application;
 use Llaumgui\CheckToolsFramework\Command\BomCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-/**
- * The BomCommand class.
- */
-class BomCommandTest extends \PHPUnit_Framework_TestCase
+class BomCommandTest extends PhpUnitHelper
 {
 
     /**
@@ -34,9 +32,9 @@ class BomCommandTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->container = new ContainerBuilder();
-        $definitions = array(
+        $definitions = [
             'ctf.checktool_bom' => new Definition('Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool')
-        );
+        ];
         $this->container->setDefinitions($definitions);
     }
 
@@ -52,10 +50,10 @@ class BomCommandTest extends \PHPUnit_Framework_TestCase
 
         $command = $application->find('bom');
         $commandTester = new CommandTester($command);
-        $commandTester->execute(array(
+        $commandTester->execute([
             'command' => $command->getName(),
-            'path'    => __DIR__ . '/../files'
-        ));
+            'path'    => $this->filesToTestPath
+        ]);
 
         $this->assertRegExp('/Check BOM on bom_ko.[a-z]+: Failed/', $commandTester->getDisplay());
     }

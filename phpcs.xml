@@ -4,7 +4,8 @@
 
     <file>./src/</file>
     <file>./bin/</file>
-    <exclude-pattern>*/Tests/*</exclude-pattern>
+    <file>./tests/</file>
+    <exclude-pattern>./tests/files/*</exclude-pattern>
     
     <arg name="report" value="full"/>
     <rule ref="PSR2"/>
