@@ -35,7 +35,7 @@ class BomCommand extends CheckToolsCommandAware
             ->setHelp('For more informations about BOM, see '
                 . '<fg=blue>http://en.wikipedia.org/wiki/Byte_order_mark</fg=blue>.' . "\n"
                 . 'For more information about regular expression, see <fg=blue>http://symfony.com/doc/current/components/finder.html</fg=blue>.' . "\n\n"
-                . 'Example: Find al ".md" and ".php" in "vendor/Llaumgui", exculding "*Tests.php" and "tests" directory:' . "\n"
+                . 'Example: Find all ".md" and ".php" in "vendor/Llaumgui", exculding "*Tests.php" and "tests" directory:' . "\n"
                 . 'php bin/phpct bom --filename="/.(php|md)$/" --filename-exclusion="/Test.php$/" --path-exclusion="/tests/" vendor/Llaumgui')
             // @codingStandardsIgnoreEnd
         ;
