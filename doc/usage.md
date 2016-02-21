@@ -5,7 +5,7 @@ currentMenu: usage
 # Usage
 Use CheckToolsFramework in command line:
 ```bash
-llaumgui@stargazer ~/Workspace/CheckToolsFramework> bin/phpct                                                                                                                          [develop ✘]
+$ bin/phpct
 CheckToolsFramework version 0.1.0
 
 Usage:

@@ -5,7 +5,7 @@ currentMenu: builtin_test
 # Built in tests
 ## Check BOM in files (bom)
 ```bash
-$ phpct bom -h                                                                                                                   [develop ✘]
+$ phpct bom -h
 Usage:
   bom [options] [--] <path> (<path>)...
 
