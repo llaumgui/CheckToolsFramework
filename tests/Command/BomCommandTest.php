@@ -52,7 +52,7 @@ class BomCommandTest extends PhpUnitHelper
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             'command' => $command->getName(),
-            'path'    => $this->filesToTestPath
+            'path'    => __DIR__ . '/../files'
         ]);
 
         $this->assertRegExp('/Check BOM on bom_ko.[a-z]+: Failed/', $commandTester->getDisplay());
