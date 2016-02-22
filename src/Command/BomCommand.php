@@ -79,6 +79,9 @@ class BomCommand extends CheckToolsCommandAware
             if (!$check->getResult()) {
                 $this->output->writeln($check->getDescription() . ': <error>Failed</error>');
                 $testCase->addError($check->getMessage());
+
+                // Count error
+                $this->numError++;
             } elseif ($check->getResult() && $this->output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
                 $this->output->writeln($check->getDescription() . ': <info>Succeeded</info>');
             }
@@ -86,6 +89,7 @@ class BomCommand extends CheckToolsCommandAware
         }
         $testSuite->finish();
 
-        $this->writeOutput($testSuites->getXml());
+        // Return exit status
+        return $this->postCheckHook($testSuites->getXml());
     }
 }

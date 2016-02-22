@@ -55,9 +55,13 @@ abstract class CheckToolsCommandAware extends Command
      */
     protected $finder;
     /**
-     * @var Symfony\Component\Console\Output\OutputInterface;
+     * @var Symfony\Component\Console\Output\OutputInterface
      */
     protected $output;
+    /**
+     * @var integer
+     */
+    protected $numError;
 
 
     /**
@@ -161,11 +165,29 @@ abstract class CheckToolsCommandAware extends Command
 
 
     /**
+     * Post check hook called at the end of a check.
+     *
+     * @param string $output String to output.
+     * @return int The command exit code.
+     */
+    protected function postCheckHook($output)
+    {
+        $this->writeOutput($output);
+
+        if ($this->numError > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+
+    /**
      * Output test result.
      *
-     * @param string $content
+     * @param string $content to output in file.
      */
-    public function writeOutput($content)
+    protected function writeOutput($content)
     {
         if (!empty($this->outputFile)) {
             $fs = new Filesystem();
