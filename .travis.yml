@@ -11,7 +11,6 @@ matrix:
     - php: hhvm
     - php: nightly
 
-
 before_install:
   # Update composer binary
   - composer self-update
@@ -25,6 +24,7 @@ script:
   - ./vendor/bin/phpcs
 
 after_script:
+  # TestReporter seem desn't work with these version og PHP
   - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then ./vendor/bin/test-reporter; fi
   # Full Website generator
   - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then sh generate-website.sh; fi
