@@ -23,7 +23,7 @@ scripts:
 
 # Set this variable to use a Custom Domain
 # The content of this variable will be directly inserted into the CNAME file
-cname: llaumgui.github.io
+#cname: llaumgui.github.io
 
 # Set the target branch in which to deploy the generated website
 branch: gh-pages
@@ -81,6 +81,6 @@ menu:
                 linkedin:
                     text: "<span class=\"fa fa-linkedin\"></span> My LinkedIn profil"
                     absoluteUrl: https://www.linkedin.com/in/guillaumekulakowski
-            myblog:
-                text: "<span class=\"fa fa-user\"></span> My blog"
-                absoluteUrl: http://blog.kulakowski.fr
+                myblog:
+                    text: "<span class=\"fa fa-user\"></span> My blog"
+                    absoluteUrl: http://blog.kulakowski.fr
