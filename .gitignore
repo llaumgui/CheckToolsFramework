@@ -13,17 +13,7 @@ phpct.phar
 phpct.version
 
 
-# Created by https://www.gitignore.io/api/netbeans,composer,symfony,composer
-
-### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-.nb-gradle/
-
+# Created by https://www.gitignore.io/api/composer,symfony
 
 ### Composer ###
 composer.phar
