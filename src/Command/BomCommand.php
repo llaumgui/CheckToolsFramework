@@ -14,7 +14,6 @@ namespace Llaumgui\CheckToolsFramework\Command;
 use Llaumgui\CheckToolsFramework\Command\CheckToolsCommandAware;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Llaumgui\JunitXml\JunitXmlTestSuites;
 
 /**
  * The BomCommand class.
@@ -59,37 +58,11 @@ class BomCommand extends CheckToolsCommandAware
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        parent::execute($input, $output);
-
-        $checkTool = $this->getApplication()->getContainer()->get('ctf.checktool_bom');
-
-        // Init Junit log
-        $testSuites = new JunitXmlTestSuites('Check BOM.');
-        $testSuite = $testSuites->addTestSuite('Check BOM in files.');
-
-        // Find BOM in files in Finder
-        foreach ($this->getFinder() as $file) {
-            $check = $checkTool->doCheck($file);
-
-            // Create TestCase
-            $testCase = $testSuite->addTest($check->getDescription());
-            $testCase->setClassName($file->getRelativePathname());
-            $testCase->incAssertions();
-
-            if (!$check->getResult()) {
-                $this->output->writeln($check->getDescription() . ': <error>Failed</error>');
-                $testCase->addError($check->getMessage());
-
-                // Count error
-                $this->numError++;
-            } elseif ($check->getResult() && $this->output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-                $this->output->writeln($check->getDescription() . ': <info>Succeeded</info>');
-            }
-            $testCase->finish();
-        }
-        $testSuite->finish();
+        $this->setCheckTool($this->getApplication()->getContainer()->get('ctf.checktool_bom'));
+        $this->setTestSuitesDescription('Check BOM.');
+        $this->setTestSuiteDescription('Check BOM in files.');
 
         // Return exit status
-        return $this->postCheckHook($testSuites->getXml());
+        return parent::execute($input, $output);
     }
 }
