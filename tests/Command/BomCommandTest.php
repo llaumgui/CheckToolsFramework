@@ -72,6 +72,8 @@ class BomCommandTest extends PhpUnitHelper
 
         // test file output
         $this->assertTrue($this->mockedFileSystem->hasChild('junit.xml'));
-        $this->assertTrue(JunitXmlValidation::validateXsdFromString($this->mockedFileSystem->getChild('junit.xml')->getContent()));
+        $this->assertTrue(JunitXmlValidation::validateXsdFromString(
+            $this->mockedFileSystem->getChild('junit.xml')->getContent()
+        ));
     }
 }
