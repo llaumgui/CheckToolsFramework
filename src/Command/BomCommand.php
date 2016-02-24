@@ -59,8 +59,6 @@ class BomCommand extends CheckToolsCommandAware
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->setCheckTool($this->getApplication()->getContainer()->get('ctf.checktool_bom'));
-        $this->setTestSuitesDescription('Check BOM.');
-        $this->setTestSuiteDescription('Check BOM in files.');
 
         // Return exit status
         return parent::execute($input, $output);

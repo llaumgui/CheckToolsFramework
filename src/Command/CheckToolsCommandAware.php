@@ -83,16 +83,6 @@ abstract class CheckToolsCommandAware extends Command
      * @var Llaumgui\JunitXml\JunitXmlTestSuites
      */
     private $testSuites;
-    /**
-     * testSuites description..
-     * @var string
-     */
-    private $testSuitesDescription;
-    /**
-     * testSuite description..
-     * @var string
-     */
-    private $testSuiteDescription;
 
 
     /**
@@ -170,9 +160,9 @@ abstract class CheckToolsCommandAware extends Command
         $this->output = $output;
 
         // Init Junit log
-        $this->testSuites = new JunitXmlTestSuites($this->getTestSuitesDescription());
-        $testSuite = $this->testSuites->addTestSuite($this->getTestSuiteDescription());
         $checkTool = $this->getCheckTool();
+        $this->testSuites = new JunitXmlTestSuites($checkTool->getTestSuitesDescription());
+        $testSuite = $this->testSuites->addTestSuite($checkTool->getTestSuiteDescription());
 
         // Do check in files from Finder
         foreach ($this->getFinder() as $file) {
@@ -277,49 +267,5 @@ abstract class CheckToolsCommandAware extends Command
     public function setCheckTool(CheckToolInterface $checkTool)
     {
         $this->checkTool = $checkTool;
-    }
-
-
-    /**
-     * textSuitesDescription getter.
-     *
-     * @return string
-     */
-    public function getTestSuitesDescription()
-    {
-        return $this->testSuitesDescription;
-    }
-
-
-    /**
-     * textSuitesDescription setter.
-     *
-     * @param string $testSuitesDescription
-     */
-    public function setTestSuitesDescription($testSuitesDescription)
-    {
-        $this->textSuitesDescription = $testSuitesDescription;
-    }
-
-
-    /**
-     * textSuiteDescription getter.
-     *
-     * @return string
-     */
-    public function getTestSuiteDescription()
-    {
-        return $this->testSuiteDescription;
-    }
-
-
-    /**
-     * textSuiteDescription setter.
-     *
-     * @param string $testSuiteDescription
-     */
-    public function setTestSuiteDescription($testSuiteDescription)
-    {
-        $this->textSuitesDescription = $testSuiteDescription;
     }
 }
