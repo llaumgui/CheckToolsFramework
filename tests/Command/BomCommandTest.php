@@ -18,6 +18,8 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Console\Output\OutputInterface;
+use org\bovigo\vfs\vfsStream;
+use Llaumgui\JunitXml\JunitXmlValidation;
 
 class BomCommandTest extends PhpUnitHelper
 {
@@ -37,6 +39,7 @@ class BomCommandTest extends PhpUnitHelper
             'ctf.checktool_bom' => new Definition('Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool')
         ];
         $this->container->setDefinitions($definitions);
+        $this->mockedFileSystem = vfsStream::setup();
     }
 
 
@@ -56,13 +59,19 @@ class BomCommandTest extends PhpUnitHelper
                 'command'       => $command->getName(),
                 'path'          => __DIR__ . '/../files',
                 '--filename'    => '/bom_(ok|ko).php$/',
+                '--output'      => $this->mockedFileSystem->url() . '/junit.xml'
             ],
             [
                 'verbosity' => OutputInterface::VERBOSITY_VERBOSE
             ]
         );
 
+        // Test stdout output
         $this->assertRegExp('/Check BOM on bom_ko.[a-z]+: Failed/', $commandTester->getDisplay());
         $this->assertRegExp('/Check BOM on bom_ok.[a-z]+: Succeeded/', $commandTester->getDisplay());
+
+        // test file output
+        $this->assertTrue($this->mockedFileSystem->hasChild('junit.xml'));
+        $this->assertTrue(JunitXmlValidation::validateXsdFromString($this->mockedFileSystem->getChild('junit.xml')->getContent()));
     }
 }

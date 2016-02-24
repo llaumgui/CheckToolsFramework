@@ -25,4 +25,20 @@ interface CheckToolInterface
      * @return CheckToolTest Return a CheckToolsResult object.
      */
     public function doCheck(SplFileInfo $content);
+
+
+    /**
+     * textSuitesDescription getter.
+     *
+     * @return string
+     */
+    public function getTestSuitesDescription();
+
+
+    /**
+     * textSuiteDescription getter.
+     *
+     * @return string
+     */
+    public function getTestSuiteDescription();
 }

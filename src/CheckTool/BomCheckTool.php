@@ -22,6 +22,16 @@ class BomCheckTool implements CheckToolInterface
      * @var string
      */
     private $bom;
+    /**
+     * testSuites description..
+     * @var string
+     */
+    private $testSuitesDescription = 'Check BOM.';
+    /**
+     * testSuite description..
+     * @var string
+     */
+    private $testSuiteDescription = 'Check BOM in files.';
 
 
     /**
@@ -52,5 +62,26 @@ class BomCheckTool implements CheckToolInterface
         }
 
         return $checkToolTest;
+    }
+
+    /**
+     * textSuitesDescription getter.
+     *
+     * @return string
+     */
+    public function getTestSuitesDescription()
+    {
+        return $this->testSuitesDescription;
+    }
+
+
+    /**
+     * textSuiteDescription getter.
+     *
+     * @return string
+     */
+    public function getTestSuiteDescription()
+    {
+        return $this->testSuiteDescription;
     }
 }
