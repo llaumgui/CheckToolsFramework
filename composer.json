@@ -27,7 +27,8 @@
     "phpunit/phpunit": "^4",
     "squizlabs/php_codesniffer": "2.*",
     "codeclimate/php-test-reporter": "dev-master",
-    "phine/phar": "^1.0"
+    "phine/phar": "^1.0",
+    "mikey179/vfsStream": "~1"
   },
   "autoload": {
     "psr-4": {
