@@ -2,6 +2,7 @@ parameters:
     service.ctf_console.class:          'Llaumgui\CheckToolsFramework\Console\Application'
     service.ctf_cli.class:              'Llaumgui\CheckToolsFramework\Cli'
     service.ctf_checktool_bom.class:    'Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool'
+    service.ctf_checktool_json.class:   'Llaumgui\CheckToolsFramework\CheckTool\JsonCheckTool'
 
 
 services:
@@ -17,3 +18,6 @@ services:
 
     ctf.checktool_bom:
         class:      "%service.ctf_checktool_bom.class%"
+
+    ctf.checktool_json:
+        class:      "%service.ctf_checktool_json.class%"
