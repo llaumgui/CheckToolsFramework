@@ -159,6 +159,17 @@ abstract class CheckToolsCommandAware extends Command
         $this->ignoreVcs = ($input->getOption('noignore-vcs') ? false : true);
         $this->output = $output;
 
+        return $this->doExecute();
+    }
+
+
+    /**
+     * Do the execution of the command.
+     *
+     * @return null|int null or 0 if everything went fine, or an error code
+     */
+    protected function doExecute()
+    {
         // Init Junit log
         $checkTool = $this->getCheckTool();
         $this->testSuites = new JunitXmlTestSuites($checkTool->getTestSuitesDescription());

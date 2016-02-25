@@ -29,7 +29,7 @@ class BomCommand extends CheckToolsCommandAware
 
         $this
             ->setName('bom')
-            ->setDescription('Test if files have BOM (Byte Order Mark).')
+            ->setDescription('Test if files have BOM (Byte Order Mark)')
             // @codingStandardsIgnoreStart
             ->setHelp('For more informations about BOM, see '
                 . '<fg=blue>http://en.wikipedia.org/wiki/Byte_order_mark</fg=blue>.' . "\n"
