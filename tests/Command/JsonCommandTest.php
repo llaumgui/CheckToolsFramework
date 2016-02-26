@@ -13,7 +13,7 @@ namespace Tests\Llaumgui\CheckToolsFramework\Command;
 
 use Tests\Llaumgui\CheckToolsFramework\PhpUnitHelper;
 use Llaumgui\CheckToolsFramework\Console\Application;
-use Llaumgui\CheckToolsFramework\Command\BomCommand;
+use Llaumgui\CheckToolsFramework\Command\JsonCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -21,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use org\bovigo\vfs\vfsStream;
 use Llaumgui\JunitXml\JunitXmlValidation;
 
-class BomCommandTest extends PhpUnitHelper
+class JsonCommandTest extends PhpUnitHelper
 {
     /**
      * @var ContainerInterface
@@ -40,7 +40,7 @@ class BomCommandTest extends PhpUnitHelper
     {
         $this->container = new ContainerBuilder();
         $definitions = [
-            'ctf.checktool_bom' => new Definition('Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool')
+            'ctf.checktool_json' => new Definition('Llaumgui\CheckToolsFramework\CheckTool\JsonCheckTool')
         ];
         $this->container->setDefinitions($definitions);
         $this->mockedFileSystem = vfsStream::setup();
@@ -53,17 +53,16 @@ class BomCommandTest extends PhpUnitHelper
     public function testExecute()
     {
         $application = new Application();
-        $application->add(new BomCommand());
+        $application->add(new JsonCommand());
         $application->setContainer($this->container);
 
-        $command = $application->find('bom');
+        $command = $application->find('json');
         $commandTester = new CommandTester($command);
         $commandTester->execute(
             [
                 'command'       => $command->getName(),
                 'path'          => __DIR__ . '/../files',
-                '--filename'    => '/bom_(ok|ko).php$/',
-                '--path-exclusion'      => '/bomToExclude/',
+                '--filename'    => '/json_(ok|ko)(.*)$/',
                 '--output'      => $this->mockedFileSystem->url() . '/junit.xml'
             ],
             [
@@ -72,8 +71,8 @@ class BomCommandTest extends PhpUnitHelper
         );
 
         // Test stdout output
-        $this->assertRegExp('/Check BOM on bom_ko.[a-z]+: Failed/', $commandTester->getDisplay());
-        $this->assertRegExp('/Check BOM on bom_ok.[a-z]+: Succeeded/', $commandTester->getDisplay());
+        $this->assertRegExp('/Check the JSON syntax of json_ko.json: Failed/', $commandTester->getDisplay());
+        $this->assertRegExp('/Check the JSON syntax of json_ok.json: Succeeded/', $commandTester->getDisplay());
 
         // Test status code
         $this->assertEquals(1, $commandTester->getStatusCode());

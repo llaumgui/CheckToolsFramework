@@ -1,9 +1,10 @@
-# Save as .codeclimate.yml (note leading .) in project root directory
-languages:
-  Ruby: false
-  JavaScript: false
-  PHP: true
-  Python: false
+engines:
+  phpcodesniffer:
+    enabled: true
+    config:
+      file_extensions: "php,inc,lib"
+  phpmd:
+    enabled: true
 
 exclude_paths:
-  - "tests/"
+  - tests/**/*

@@ -27,7 +27,7 @@ class JsonCheckTool implements CheckToolInterface
      * testSuite description..
      * @var string
      */
-    private $testSuiteDescription = 'Check JSON syntaxe.';
+    private $testSuiteDescription = 'Check JSON syntax.';
 
 
     /**
@@ -67,6 +67,12 @@ class JsonCheckTool implements CheckToolInterface
                 $result = true;
                 $message = '';
                 break;
+            case JSON_ERROR_SYNTAX:
+                $result = false;
+                $message = 'Syntax error';
+                break;
+            // @codeCoverageIgnoreStart
+            // Because it's PHP native
             case JSON_ERROR_DEPTH:
                 $result = false;
                 $message = 'The maximum stack depth has been exceeded';
@@ -79,10 +85,7 @@ class JsonCheckTool implements CheckToolInterface
                 $result = false;
                 $message = 'Control character error, possibly incorrectly encoded';
                 break;
-            case JSON_ERROR_SYNTAX:
-                $result = false;
-                $message = 'Syntax error';
-                break;
+
             case JSON_ERROR_UTF8:
                 $result = false;
                 $message = 'Malformed UTF-8 characters, possibly incorrectly encoded';
@@ -103,13 +106,14 @@ class JsonCheckTool implements CheckToolInterface
                 $result = false;
                 $message = 'has an unknown error';
                 break;
+            // @codeCoverageIgnoreEnd
         }
 
         $checkToolTest = new CheckToolTest($result);
-        $checkToolTest->setDescription('Check BOM on ' . $file->getRelativePathname());
+        $checkToolTest->setDescription('Check the JSON syntax of ' . $file->getRelativePathname());
 
         if (!$result) {
-            $checkToolTest->setMessage('The file "' . $file->getRelativePathname() . '" is has an error: ' . $message);
+            $checkToolTest->setMessage('The file "' . $file->getRelativePathname() . '" has an JSO error: ' . $message);
         }
 
         return $checkToolTest;

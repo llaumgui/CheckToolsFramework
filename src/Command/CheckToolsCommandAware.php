@@ -253,7 +253,7 @@ abstract class CheckToolsCommandAware extends Command
             try {
                 $fs->dumpFile($this->outputFile, $this->testSuites->getXml());
             } catch (IOExceptionInterface $e) {
-                echo 'Error writing in ' . $this->outputFile;
+                $this->output->writeln('<info>Error writing in ' . $this->outputFile . '</info>');
             }
         }
     }
