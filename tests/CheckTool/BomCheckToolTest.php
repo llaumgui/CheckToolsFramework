@@ -33,7 +33,7 @@ class BomCheckToolTest extends PhpUnitHelper
             $check = $bomCheckTool->doCheck($file);
             if (strpos($file->getFileName(), "bom_ko") !== false) {
                 $this->assertFalse($check->getResult());
-            } else {
+            } elseif (strpos($file->getFileName(), "bom_ok") !== false) {
                 $this->assertTrue($check->getResult());
             }
 

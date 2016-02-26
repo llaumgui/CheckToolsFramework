@@ -46,7 +46,7 @@ class BomCommandTest extends PhpUnitHelper
     /**
      * Check bom command.
      */
-    public function testExecuteKo()
+    public function testExecute()
     {
         $application = new Application();
         $application->add(new BomCommand());
@@ -59,6 +59,7 @@ class BomCommandTest extends PhpUnitHelper
                 'command'       => $command->getName(),
                 'path'          => __DIR__ . '/../files',
                 '--filename'    => '/bom_(ok|ko).php$/',
+                '--path-exclusion'      => '/bomToExclude/',
                 '--output'      => $this->mockedFileSystem->url() . '/junit.xml'
             ],
             [
@@ -78,35 +79,5 @@ class BomCommandTest extends PhpUnitHelper
         $this->assertTrue(JunitXmlValidation::validateXsdFromString(
             $this->mockedFileSystem->getChild('junit.xml')->getContent()
         ));
-    }
-
-
-    /**
-     * Check bom command.
-     */
-    public function testExecuteOk()
-    {
-        $application = new Application();
-        $application->add(new BomCommand());
-        $application->setContainer($this->container);
-
-        $command = $application->find('bom');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(
-            [
-                'command'       => $command->getName(),
-                'path'          => __DIR__ . '/../files',
-                '--filename'    => '/bom_ok.php$/',
-            ],
-            [
-                'verbosity' => OutputInterface::VERBOSITY_VERBOSE
-            ]
-        );
-
-        // Test stdout output
-        $this->assertRegExp('/Check BOM on bom_ok.[a-z]+: Succeeded/', $commandTester->getDisplay());
-
-        // Test status code
-        $this->assertEquals(0, $commandTester->getStatusCode());
     }
 }
