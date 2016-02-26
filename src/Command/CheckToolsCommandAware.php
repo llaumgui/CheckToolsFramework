@@ -160,6 +160,8 @@ abstract class CheckToolsCommandAware extends Command
         $this->ignoreVcs = ($input->getOption('noignore-vcs') ? false : true);
         $this->output = $output;
 
+        $output->writeln($this->getApplication()->getLongVersion() . "\n");
+
         return $this->doExecute();
     }
 
