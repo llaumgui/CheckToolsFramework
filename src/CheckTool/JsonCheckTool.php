@@ -19,12 +19,14 @@ use Symfony\Component\Finder\SplFileInfo;
 class JsonCheckTool implements CheckToolInterface
 {
     /**
-     * testSuites description..
+     * testSuites description.
+     * @SuppressWarnings(PHPMD.LongVariable)
      * @var string
      */
     private $testSuitesDescription = 'Check JSON.';
     /**
      * testSuite description..
+     * @SuppressWarnings(PHPMD.LongVariable)
      * @var string
      */
     private $testSuiteDescription = 'Check JSON syntax.';
@@ -62,7 +64,29 @@ class JsonCheckTool implements CheckToolInterface
     public function doCheck(SplFileInfo $file)
     {
         json_decode($file->getContents());
-        switch (json_last_error()) {
+        list($result, $message) = $this->getJsonError(json_last_error());
+
+        $checkToolTest = new CheckToolTest($result);
+        $checkToolTest->setDescription('Check the JSON syntax of ' . $file->getRelativePathname());
+
+        if (!$result) {
+            $checkToolTest->setMessage('The file "' . $file->getRelativePathname() . '" has an JSO error: ' . $message);
+        }
+
+        return $checkToolTest;
+    }
+
+
+    /**
+     * Get human error from json_last_error error code.
+     *
+     * @param integer $errorCode The error code.
+     *
+     * @return array Return a array.
+     */
+    public function getJsonError($errorCode)
+    {
+        switch ($errorCode) {
             case JSON_ERROR_NONE:
                 $result = true;
                 $message = '';
@@ -85,7 +109,6 @@ class JsonCheckTool implements CheckToolInterface
                 $result = false;
                 $message = 'Control character error, possibly incorrectly encoded';
                 break;
-
             case JSON_ERROR_UTF8:
                 $result = false;
                 $message = 'Malformed UTF-8 characters, possibly incorrectly encoded';
@@ -106,16 +129,8 @@ class JsonCheckTool implements CheckToolInterface
                 $result = false;
                 $message = 'has an unknown error';
                 break;
-            // @codeCoverageIgnoreEnd
-        }
+        }// @codeCoverageIgnoreEnd
 
-        $checkToolTest = new CheckToolTest($result);
-        $checkToolTest->setDescription('Check the JSON syntax of ' . $file->getRelativePathname());
-
-        if (!$result) {
-            $checkToolTest->setMessage('The file "' . $file->getRelativePathname() . '" has an JSO error: ' . $message);
-        }
-
-        return $checkToolTest;
+        return array($result, $message);
     }
 }

@@ -50,6 +50,7 @@ abstract class CheckToolsCommandAware extends Command
     protected $fileNamePatern = "*";
     /**
      * Command argument: --filename-exclusion.
+     * @SuppressWarnings(PHPMD.LongVariable)
      * @var string
      */
     protected $fileNamePaternExclusion;
@@ -249,9 +250,9 @@ abstract class CheckToolsCommandAware extends Command
     protected function writeOutput()
     {
         if (!empty($this->outputFile)) {
-            $fs = new Filesystem();
+            $fileSystem = new Filesystem();
             try {
-                $fs->dumpFile($this->outputFile, $this->testSuites->getXml());
+                $fileSystem->dumpFile($this->outputFile, $this->testSuites->getXml());
             } catch (IOExceptionInterface $e) {
                 $this->output->writeln('<info>Error writing in ' . $this->outputFile . '</info>');
             }

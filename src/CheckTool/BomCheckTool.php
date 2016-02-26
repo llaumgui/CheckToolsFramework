@@ -19,12 +19,14 @@ use Symfony\Component\Finder\SplFileInfo;
 class BomCheckTool implements CheckToolInterface
 {
     /**
-     * testSuites description..
+     * testSuites description.
+     * @SuppressWarnings(PHPMD.LongVariable)
      * @var string
      */
     private $testSuitesDescription = 'Check BOM.';
     /**
-     * testSuite description..
+     * testSuite description.
+     * @SuppressWarnings(PHPMD.LongVariable)
      * @var string
      */
     private $testSuiteDescription = 'Check BOM in files.';
