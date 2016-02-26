@@ -23,11 +23,15 @@ use Llaumgui\JunitXml\JunitXmlValidation;
 
 class JsonCommandTest extends PhpUnitHelper
 {
-
     /**
      * @var ContainerInterface
      */
     protected $container;
+    /**
+     * @var org\bovigo\vfs\vfsStreamDirectory
+     */
+    protected $mockedFileSystem;
+
 
     /**
      * Setup container for test.

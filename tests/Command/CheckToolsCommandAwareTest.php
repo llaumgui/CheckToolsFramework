@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Output\OutputInterface;
 use Llaumgui\CheckToolsFramework\Command\BomCommand;
+use org\bovigo\vfs\vfsStream;
 
 /**
  * Use to test all globals options.
@@ -28,6 +29,11 @@ class CheckToolsCommandAwareTest extends PhpUnitHelper
      * @var ContainerInterface
      */
     protected $container;
+    /**
+     * @var org\bovigo\vfs\vfsStreamDirectory
+     */
+    protected $mockedFileSystem;
+
 
     /**
      * Setup container for test.
@@ -40,6 +46,7 @@ class CheckToolsCommandAwareTest extends PhpUnitHelper
             'ctf.checktool_bom' => new Definition('Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool')
         ];
         $this->container->setDefinitions($definitions);
+        $this->mockedFileSystem = vfsStream::setup('root', 0000); // Read only filesystem
     }
 
 
@@ -120,5 +127,35 @@ class CheckToolsCommandAwareTest extends PhpUnitHelper
 
         // Test status code
         $this->assertEquals(0, $commandTester->getStatusCode());
+    }
+
+
+    /**
+     * Check bom command.
+     */
+    public function testExecuteIOException()
+    {
+        $application = new Application();
+        $application->add(new BomCommand());
+        $application->setContainer($this->container);
+
+        $command = $application->find('bom');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(
+            [
+                'command'               => $command->getName(),
+                'path'                  => __DIR__ . '/../files',
+                '--filename'            => '/bom_(.*).php$/',
+                '--filename-exclusion'  => '/ko/',
+                '--path-exclusion'      => '/bomToExclude/',
+                 '--output'      => $this->mockedFileSystem->url() . '/junit.xml'
+            ],
+            [
+                'verbosity' => OutputInterface::VERBOSITY_VERBOSE
+            ]
+        );
+
+        // Test stdout output
+        $this->assertRegExp('/Error writing in (.*)junit.xml/', $commandTester->getDisplay());
     }
 }
