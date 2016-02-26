@@ -27,7 +27,7 @@ class JsonCheckTool implements CheckToolInterface
      * testSuite description..
      * @var string
      */
-    private $testSuiteDescription = 'Check JSON syntaxe.';
+    private $testSuiteDescription = 'Check JSON syntax.';
 
 
     /**
@@ -106,10 +106,10 @@ class JsonCheckTool implements CheckToolInterface
         }
 
         $checkToolTest = new CheckToolTest($result);
-        $checkToolTest->setDescription('Check BOM on ' . $file->getRelativePathname());
+        $checkToolTest->setDescription('Check the JSON syntax of ' . $file->getRelativePathname());
 
         if (!$result) {
-            $checkToolTest->setMessage('The file "' . $file->getRelativePathname() . '" is has an error: ' . $message);
+            $checkToolTest->setMessage('The file "' . $file->getRelativePathname() . '" has an JSO error: ' . $message);
         }
 
         return $checkToolTest;
