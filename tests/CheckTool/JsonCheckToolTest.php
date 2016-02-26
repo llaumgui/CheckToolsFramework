@@ -12,10 +12,10 @@
 namespace Tests\Llaumgui\CheckToolsFramework\CheckTool;
 
 use Tests\Llaumgui\CheckToolsFramework\PhpUnitHelper;
-use Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool;
+use Llaumgui\CheckToolsFramework\CheckTool\JsonCheckTool;
 use Symfony\Component\Finder\Finder;
 
-class BomCheckToolTest extends PhpUnitHelper
+class JsonCheckToolTest extends PhpUnitHelper
 {
 
     /**
@@ -23,17 +23,17 @@ class BomCheckToolTest extends PhpUnitHelper
      */
     public function testDoCheck()
     {
-        $bomCheckTool = new BomCheckTool();
+        $jsonCheckTool = new JsonCheckTool();
 
         // Get testing files
         $finder = new Finder();
-        $finder->files()->in(__DIR__ . '/../files');
+        $finder->files()->in(__DIR__ . '/../files')->name('/\.json/');
 
         foreach ($finder as $file) {
-            $check = $bomCheckTool->doCheck($file);
-            if (strpos($file->getFileName(), "bom_ko") !== false) {
+            $check = $jsonCheckTool->doCheck($file);
+            if (strpos($file->getFileName(), "json_ko") !== false) {
                 $this->assertFalse($check->getResult());
-            } elseif (strpos($file->getFileName(), "bom_ok") !== false) {
+            } else {
                 $this->assertTrue($check->getResult());
             }
 

@@ -46,7 +46,7 @@ class BomCommandTest extends PhpUnitHelper
     /**
      * Check bom command.
      */
-    public function testExecuteKo()
+    public function testExecute()
     {
         $application = new Application();
         $application->add(new BomCommand());
@@ -59,6 +59,7 @@ class BomCommandTest extends PhpUnitHelper
                 'command'       => $command->getName(),
                 'path'          => __DIR__ . '/../files',
                 '--filename'    => '/bom_(ok|ko).php$/',
+                '--path-exclusion'      => '/bomToExclude/',
                 '--output'      => $this->mockedFileSystem->url() . '/junit.xml'
             ],
             [
@@ -69,6 +70,9 @@ class BomCommandTest extends PhpUnitHelper
         // Test stdout output
         $this->assertRegExp('/Check BOM on bom_ko.[a-z]+: Failed/', $commandTester->getDisplay());
         $this->assertRegExp('/Check BOM on bom_ok.[a-z]+: Succeeded/', $commandTester->getDisplay());
+
+        // Test status code
+        $this->assertEquals(1, $commandTester->getStatusCode());
 
         // test file output
         $this->assertTrue($this->mockedFileSystem->hasChild('junit.xml'));
