@@ -70,10 +70,43 @@ class BomCommandTest extends PhpUnitHelper
         $this->assertRegExp('/Check BOM on bom_ko.[a-z]+: Failed/', $commandTester->getDisplay());
         $this->assertRegExp('/Check BOM on bom_ok.[a-z]+: Succeeded/', $commandTester->getDisplay());
 
+        // Test status code
+        $this->assertEquals(1, $commandTester->getStatusCode());
+
         // test file output
         $this->assertTrue($this->mockedFileSystem->hasChild('junit.xml'));
         $this->assertTrue(JunitXmlValidation::validateXsdFromString(
             $this->mockedFileSystem->getChild('junit.xml')->getContent()
         ));
+    }
+
+
+    /**
+     * Check bom command.
+     */
+    public function testExecuteOk()
+    {
+        $application = new Application();
+        $application->add(new BomCommand());
+        $application->setContainer($this->container);
+
+        $command = $application->find('bom');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(
+            [
+                'command'       => $command->getName(),
+                'path'          => __DIR__ . '/../files',
+                '--filename'    => '/bom_ok.php$/',
+            ],
+            [
+                'verbosity' => OutputInterface::VERBOSITY_VERBOSE
+            ]
+        );
+
+        // Test stdout output
+        $this->assertRegExp('/Check BOM on bom_ok.[a-z]+: Succeeded/', $commandTester->getDisplay());
+
+        // Test status code
+        $this->assertEquals(0, $commandTester->getStatusCode());
     }
 }
