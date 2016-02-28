@@ -38,9 +38,16 @@ class Extension implements ExtensionInterface, PrependExtensionInterface
         $processor = new Processor();
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $container->setParameter('check_tools_framework.default_commands', $config['default_commands']);
+        // Set parameter
         $container->setParameter('check_tools_framework.name', 'CheckToolsFramework');
         $container->setParameter('check_tools_framework.version', '0.2.0');
+
+        // Inject parameters by checktools
+        foreach ($config['check_tools'] as $checkToolsName => $checkToolsConfig) {
+            $container->setParameter('check_tools_framework.check_tools.' . $checkToolsName, $checkToolsConfig);
+        }
+
+
     }
 
 
@@ -53,7 +60,7 @@ class Extension implements ExtensionInterface, PrependExtensionInterface
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
-        $loader->load('command.yml');
+        $loader->load('check_tools_framework.yml');
     }
 
 

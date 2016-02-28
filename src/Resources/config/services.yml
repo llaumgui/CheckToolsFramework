@@ -1,23 +1,42 @@
-parameters:
-    service.ctf_console.class:          'Llaumgui\CheckToolsFramework\Console\Application'
-    service.ctf_cli.class:              'Llaumgui\CheckToolsFramework\Cli'
-    service.ctf_checktool_bom.class:    'Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool'
-    service.ctf_checktool_json.class:   'Llaumgui\CheckToolsFramework\CheckTool\JsonCheckTool'
-
-
 services:
     ctf.console:
-        class:      "%service.ctf_console.class%"
+        class:      Llaumgui\CheckToolsFramework\Console\Application
         arguments:  ["%check_tools_framework.name%", "%check_tools_framework.version%"]
         calls:
-             - [setContainer,   ["@service_container"]]
+            - [setContainer, ["@service_container"]]
 
     ctf.cli:
-        class:      "%service.ctf_cli.class%"
-        arguments:  ["@ctf.console", "%check_tools_framework.default_commands%"]
+        class:      Llaumgui\CheckToolsFramework\Cli
+        arguments:  ["@ctf.console"]
 
-    ctf.checktool_bom:
-        class:      "%service.ctf_checktool_bom.class%"
 
-    ctf.checktool_json:
-        class:      "%service.ctf_checktool_json.class%"
+    # bom
+    ctf.checktool.bom:
+        class:      Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool
+        arguments:  ["%check_tools_framework.check_tools.bom%"]
+    ctf.command.bom:
+        class:      Llaumgui\CheckToolsFramework\Command\BomCommand
+        arguments:  ["bom", "@ctf.checktool.bom"]
+        tags:
+            -  { name: console.command }
+
+    # json
+    ctf.checktool.json:
+        class:      Llaumgui\CheckToolsFramework\CheckTool\JsonCheckTool
+        arguments:  ["%check_tools_framework.check_tools.json%"]
+    ctf.command.json:
+        class:      Llaumgui\CheckToolsFramework\Command\JsonCommand
+        arguments:  ["json", "@ctf.checktool.json"]
+        tags:
+            -  { name: console.command }
+
+    # from_config_file
+    ctf.checktool.from_config_file:
+        class:      Llaumgui\CheckToolsFramework\CheckTool\FromConfigFileCheckTool
+        arguments:  ["%check_tools_framework.check_tools.from_config_file%"]
+    ctf.command.from_config_file:
+        class:      Llaumgui\CheckToolsFramework\Command\FromConfigFileCommand
+        arguments:  ["from_config_file", "@ctf.checktool.from_config_file"]
+        #tags:
+        #    -  { name: console.command }
+

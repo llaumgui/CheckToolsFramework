@@ -1,0 +1,8 @@
+<testsuites name="Check JSON.'" tests="2" errors="1" failures="0" time="0">
+    <testsuite timestamp="2015-05-21T09:30:00+02:00" errors="1" failures="0" skipped="0" name="Check JSON syntax." tests="2" time="0">
+        <testcase name="Check the JSON syntax of json_ok.json" classname="json_ok.json" assertions="1" time="0"/>
+        <testcase name="Check the JSON syntax of json_ko.json" classname="json_ko.json" assertions="1" time="0">
+            <error>The file "json_ko.json" has an JSON error: Syntax error</error>
+        </testcase>
+    </testsuite>
+</testsuites>

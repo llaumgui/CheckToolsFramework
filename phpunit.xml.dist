@@ -6,6 +6,8 @@
          bootstrap="vendor/autoload.php">
     <php>
         <ini name="error_reporting" value="-1" />
+        <const name="PATH_TESING_FILES" value="./tests/Resources/testing_files"/>
+        <const name="PATH_TESING_XML" value="./tests/Resources/xml_results"/>
     </php>
 
     <testsuites>

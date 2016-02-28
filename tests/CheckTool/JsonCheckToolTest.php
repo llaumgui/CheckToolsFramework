@@ -23,21 +23,27 @@ class JsonCheckToolTest extends PhpUnitHelper
      */
     public function testDoCheck()
     {
-        $jsonCheckTool = new JsonCheckTool();
+        // Load CheckTool
+        $config = $this->yamlLoader('check_tools_framework.yml');
+        $jsonCheckTool = new JsonCheckTool($config['check_tools_framework']['check_tools']['json']);
 
         // Get testing files
         $finder = new Finder();
-        $finder->files()->in(__DIR__ . '/../files')->name('/\.json/');
+        $finder->files()->in(PATH_TESING_FILES)->name('/\.json/');
 
+        $count = 0;
         foreach ($finder as $file) {
             $check = $jsonCheckTool->doCheck($file);
             if (strpos($file->getFileName(), "json_ko") !== false) {
                 $this->assertFalse($check->getResult());
+                $count++;
             } else {
                 $this->assertTrue($check->getResult());
+                $count++;
             }
 
             $this->assertInstanceOf('Llaumgui\CheckToolsFramework\CheckTool\CheckToolTest', $check);
         }
+        $this->assertTrue($count>=2);
     }
 }

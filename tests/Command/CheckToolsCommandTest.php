@@ -12,41 +12,22 @@
 namespace Tests\Llaumgui\CheckToolsFramework\Command;
 
 use Tests\Llaumgui\CheckToolsFramework\PhpUnitHelper;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Llaumgui\CheckToolsFramework\Console\Application;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Output\OutputInterface;
-use Llaumgui\CheckToolsFramework\Command\BomCommand;
-use org\bovigo\vfs\vfsStream;
 
 /**
  * Use to test all globals options.
  */
-class CheckToolsCommandAwareTest extends PhpUnitHelper
+class CheckToolsCommandTest extends PhpUnitHelper
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-    /**
-     * @var org\bovigo\vfs\vfsStreamDirectory
-     */
-    protected $mockedFileSystem;
-
-
     /**
      * Setup container for test.
      */
     protected function setUp()
     {
-        $this->container = new ContainerBuilder();
-        // Load bom command for test
-        $definitions = [
-            'ctf.checktool_bom' => new Definition('Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool')
-        ];
-        $this->container->setDefinitions($definitions);
-        $this->mockedFileSystem = vfsStream::setup('root', 0000); // Read only filesystem
+        $this->buildContainer();
+        $this->mockFileSystem('root', 0000); // Read only filesystem
     }
 
 
@@ -80,7 +61,7 @@ class CheckToolsCommandAwareTest extends PhpUnitHelper
     {
         // Load bom command for test
         $application = new Application();
-        $application->add(new BomCommand());
+        $application->add($this->container->get('ctf.command.bom'));
         $application->setContainer($this->container);
 
         $command = $application->find('list');
@@ -104,7 +85,7 @@ class CheckToolsCommandAwareTest extends PhpUnitHelper
     public function testExecuteStatusCode()
     {
         $application = new Application();
-        $application->add(new BomCommand());
+        $application->add($this->container->get('ctf.command.bom'));
         $application->setContainer($this->container);
 
         $command = $application->find('bom');
@@ -112,7 +93,7 @@ class CheckToolsCommandAwareTest extends PhpUnitHelper
         $commandTester->execute(
             [
                 'command'               => $command->getName(),
-                'path'                  => __DIR__ . '/../files',
+                'path'                  => PATH_TESING_FILES,
                 '--filename'            => '/bom_(.*).php$/',
                 '--filename-exclusion'  => '/ko/',
                 '--path-exclusion'      => '/bomToExclude/'
@@ -136,7 +117,7 @@ class CheckToolsCommandAwareTest extends PhpUnitHelper
     public function testExecuteIOException()
     {
         $application = new Application();
-        $application->add(new BomCommand());
+        $application->add($this->container->get('ctf.command.bom'));
         $application->setContainer($this->container);
 
         $command = $application->find('bom');
@@ -144,7 +125,7 @@ class CheckToolsCommandAwareTest extends PhpUnitHelper
         $commandTester->execute(
             [
                 'command'               => $command->getName(),
-                'path'                  => __DIR__ . '/../files',
+                'path'                  => PATH_TESING_FILES,
                 '--filename'            => '/bom_(.*).php$/',
                 '--filename-exclusion'  => '/ko/',
                 '--path-exclusion'      => '/bomToExclude/',

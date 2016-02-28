@@ -11,35 +11,66 @@
 
 namespace Llaumgui\CheckToolsFramework\CheckTool;
 
-use Llaumgui\CheckToolsFramework\CheckTool\CheckTool;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * The service JsonCheckTool.
  */
-class JsonCheckTool extends CheckTool implements CheckToolInterface
+class JsonCheckTool implements CheckToolInterface
 {
     /**
-     * Check if content is valid.
+     * testSuites description.
+     * @SuppressWarnings(PHPMD.LongVariable)
+     * @var string
+     */
+    private $testSuitesDescription = 'Check JSON.';
+    /**
+     * testSuite description..
+     * @SuppressWarnings(PHPMD.LongVariable)
+     * @var string
+     */
+    private $testSuiteDescription = 'Check JSON syntax.';
+
+
+    /**
+     * textSuitesDescription getter.
+     *
+     * @return string
+     */
+    public function getTestSuitesDescription()
+    {
+        return $this->testSuitesDescription;
+    }
+
+
+    /**
+     * textSuiteDescription getter.
+     *
+     * @return string
+     */
+    public function getTestSuiteDescription()
+    {
+        return $this->testSuiteDescription;
+    }
+
+
+    /**
+     * Check if content has BOM.
      *
      * @param SplFileInfo $file The $finder to check.
      *
-     * @return CheckToolTest Return a CheckToolTest object.
+     * @return CheckToolTest Return a CheckToolsResult object.
      */
     public function doCheck(SplFileInfo $file)
     {
-        // Load JSON error
         json_decode($file->getContents());
         list($result, $message) = $this->getJsonError(json_last_error());
 
-        // Inject result in CheckToolTest
         $checkToolTest = new CheckToolTest($result);
         $checkToolTest->setDescription('Check the JSON syntax of ' . $file->getRelativePathname());
 
         if (!$result) {
-            $checkToolTest->setMessage(
-                'The file "' . $file->getRelativePathname() . '" has an JSON error: ' . $message
-            );
+            $checkToolTest->setMessage('The file "' . $file->getRelativePathname() . '" has an JSO error: ' . $message);
         }
 
         return $checkToolTest;

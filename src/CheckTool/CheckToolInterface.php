@@ -14,7 +14,7 @@ namespace Llaumgui\CheckToolsFramework\CheckTool;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
- * Definition of CheckToolInterface.
+ * Definition of CheckToolInterface for all CheckTool services.
  */
 interface CheckToolInterface
 {
@@ -28,7 +28,7 @@ interface CheckToolInterface
 
 
     /**
-     * textSuitesDescription getter.
+     * Return description about textSuites.
      *
      * @return string
      */
@@ -36,9 +36,17 @@ interface CheckToolInterface
 
 
     /**
-     * textSuiteDescription getter.
+     * Return description about textSuite.
      *
      * @return string
      */
     public function getTestSuiteDescription();
+
+
+    /**
+     * Return default fileNamePatern argment..
+     *
+     * @return string
+     */
+    public function getDefaultFileNamePatern();
 }
