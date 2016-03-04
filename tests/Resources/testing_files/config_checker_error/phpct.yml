@@ -1,0 +1,4 @@
+# Global configuration for all checktools
+checker:
+    - noexist
+    - json

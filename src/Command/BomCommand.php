@@ -12,8 +12,6 @@
 namespace Llaumgui\CheckToolsFramework\Command;
 
 use Llaumgui\CheckToolsFramework\Command\CheckToolsCommand;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * The BomCommand class.

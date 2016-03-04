@@ -66,6 +66,11 @@ abstract class CheckToolsCommand extends Command
     protected $finder;
     /**
      * Output interface.
+     * @var Symfony\Component\Console\Input\InputInterface
+     */
+    protected $input;
+    /**
+     * Output interface.
      * @var Symfony\Component\Console\Output\OutputInterface
      */
     protected $output;
@@ -167,13 +172,14 @@ abstract class CheckToolsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Init CheckToolsCommand
+        $this->input = $input;
+        $this->output = $output;
         $this->path = $input->getArgument('path');
         $this->outputFile = $input->getOption('output');
         $this->pathPaternExclusion = $input->getOption('path-exclusion');
         $this->fileNamePatern = $input->getOption('filename');
         $this->fileNamePaternExclusion = $input->getOption('filename-exclusion');
         $this->ignoreVcs = ($input->getOption('noignore-vcs') ? false : true);
-        $this->output = $output;
 
         // Write information
         $this->output->writeln($this->getApplication()->getLongVersion());
@@ -224,7 +230,7 @@ abstract class CheckToolsCommand extends Command
 
                 // Count error
                 $this->numError++;
-            } elseif ($check->getResult() && $this->output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+            } elseif ($check->getResult() && $this->output->isVerbose()) {
                 $this->output->writeln($check->getDescription() . ': <info>Succeeded</info>');
             }
             $testCase->finish();

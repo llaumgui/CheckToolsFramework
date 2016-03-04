@@ -13,9 +13,9 @@ namespace Tests\Llaumgui\CheckToolsFramework\Command;
 
 use Tests\Llaumgui\CheckToolsFramework\PhpUnitHelper;
 use Llaumgui\CheckToolsFramework\Console\Application;
+use Llaumgui\JunitXml\JunitXmlValidation;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Output\OutputInterface;
-use Llaumgui\JunitXml\JunitXmlValidation;
 
 class BomCommandTest extends PhpUnitHelper
 {

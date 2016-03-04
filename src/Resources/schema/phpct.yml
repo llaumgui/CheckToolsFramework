@@ -1,0 +1,24 @@
+# YAML schema used by phpct.yml
+root:
+    _type: array
+    _children:
+        global_config:
+            _type: array
+            _required: false
+            _children:
+                path_exclusion:
+                    _required: false
+                    _type: text
+                output:
+                    _required: false
+                    _type: text
+                filename_exclusion:
+                    _required: false
+                    _type: text
+                no_ignore_vcs:
+                    _required: false
+                    _type: boolean
+        checker:
+            _type: prototype
+            _prototype:
+                _type: text

@@ -41,7 +41,6 @@ class Cli
         // Set the Application definition
         $this->console->setDefinition($this->getDefinition());
         $this->loadCommandsFromServicesTag();
-        $this->loadYamlConfigFile();
 
         $this->console->run();
     }
@@ -78,30 +77,6 @@ class Cli
         $taggedCommand = array_keys($container->findTaggedServiceIds('console.command'));
         foreach ($taggedCommand as $serviceId) {
             $this->console->add($container->get($serviceId));
-        }
-    }
-
-
-    /**
-     * Load configuration from YAML.
-     */
-    private function loadYamlConfigFile()
-    {
-        // Load the configuration file if existe.
-        $configFile = false;
-        foreach (['phpct.yml', '.phpct.yml', '.phpctrc'] as $file) {
-            if (file_exists($file)) {
-                $configFile = $file;
-                break;
-            }
-        }
-
-        // Load YAML data from file
-        if ($configFile !== false) {
-            $command = $this->console->getContainer()->get('ctf.command.from_config_file');
-            $command->setYamlConfigFile($configFile);
-            $this->console->add($command);
-            $this->console->setDefaultCommand($command->getName());
         }
     }
 }

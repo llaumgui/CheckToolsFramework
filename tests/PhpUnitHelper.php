@@ -113,7 +113,16 @@ class PhpUnitHelper extends \PHPUnit_Framework_TestCase
     public function getPrivateProperty($instance, $propertyName)
     {
         $reflector = new \ReflectionClass(get_class($instance));
-        $property = $reflector->getProperty($propertyName);
+
+        while ($reflector) {
+
+            if ($reflector->hasProperty($propertyName)) {
+                $property = $reflector->getProperty($propertyName);
+                break;
+            } else {
+                $reflector = $reflector->getParentClass();
+            }
+        }
         $property->setAccessible(true);
 
         return $property;

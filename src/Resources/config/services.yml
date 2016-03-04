@@ -37,6 +37,6 @@ services:
     ctf.command.from_config_file:
         class:      Llaumgui\CheckToolsFramework\Command\FromConfigFileCommand
         arguments:  ["from_config_file", "@ctf.checktool.from_config_file"]
-        #tags:
-        #    -  { name: console.command }
+        tags:
+            -  { name: console.command }
 
