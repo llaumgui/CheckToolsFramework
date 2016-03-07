@@ -31,10 +31,16 @@ class CommandConfiguration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('check_tools_framework');
         $rootNode
             ->children()
-                ->arrayNode('default_commands')
+                ->arrayNode('check_tools')
                     ->isRequired()
                     ->requiresAtLeastOneElement()
-                    ->prototype('scalar')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('test_suites_description')->end()
+                            ->scalarNode('test_suite_description')->end()
+                            ->scalarNode('default_file_name_patern')->end()
+                        ->end()
+                    ->end()
                 ->end()
             ->end();
 

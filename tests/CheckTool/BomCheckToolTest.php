@@ -23,21 +23,27 @@ class BomCheckToolTest extends PhpUnitHelper
      */
     public function testDoCheck()
     {
-        $bomCheckTool = new BomCheckTool();
+        // Load CheckTool
+        $config = $this->yamlLoader('check_tools_framework.yml');
+        $bomCheckTool = new BomCheckTool($config['check_tools_framework']['check_tools']['bom']);
 
         // Get testing files
         $finder = new Finder();
-        $finder->files()->in(__DIR__ . '/../files');
+        $finder->files()->in(PATH_TESING_FILES);
 
+        $count = 0;
         foreach ($finder as $file) {
             $check = $bomCheckTool->doCheck($file);
             if (strpos($file->getFileName(), "bom_ko") !== false) {
                 $this->assertFalse($check->getResult());
+                $count++;
             } elseif (strpos($file->getFileName(), "bom_ok") !== false) {
                 $this->assertTrue($check->getResult());
+                $count++;
             }
 
             $this->assertInstanceOf('Llaumgui\CheckToolsFramework\CheckTool\CheckToolTest', $check);
         }
+        $this->assertTrue($count>=2);
     }
 }

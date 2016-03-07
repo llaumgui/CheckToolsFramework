@@ -1,5 +1,0 @@
-check_tools_framework:
-    # List of Commands to load
-    default_commands:
-        - 'Llaumgui\CheckToolsFramework\Command\BomCommand'
-        - 'Llaumgui\CheckToolsFramework\Command\JsonCommand'

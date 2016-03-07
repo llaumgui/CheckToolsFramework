@@ -11,59 +11,27 @@
 
 namespace Llaumgui\CheckToolsFramework\CheckTool;
 
+use Llaumgui\CheckToolsFramework\CheckTool\CheckTool;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
- * The service BomCheckTool.
+ * The service BomCheckTool which check BOM in files provided by SplFileInfo.
  */
-class BomCheckTool implements CheckToolInterface
+class BomCheckTool extends CheckTool implements CheckToolInterface
 {
-    /**
-     * testSuites description..
-     * @var string
-     */
-    private $testSuitesDescription = 'Check BOM.';
-    /**
-     * testSuite description..
-     * @var string
-     */
-    private $testSuiteDescription = 'Check BOM in files.';
-
-
-    /**
-     * textSuitesDescription getter.
-     *
-     * @return string
-     */
-    public function getTestSuitesDescription()
-    {
-        return $this->testSuitesDescription;
-    }
-
-
-    /**
-     * textSuiteDescription getter.
-     *
-     * @return string
-     */
-    public function getTestSuiteDescription()
-    {
-        return $this->testSuiteDescription;
-    }
-
-
     /**
      * Check if content has BOM.
      *
      * @param SplFileInfo $file The $finder to check.
-     *
-     * @return CheckToolTest Return a CheckToolsResult object.
+     * @return CheckToolTest Return a CheckToolTest object.
      */
     public function doCheck(SplFileInfo $file)
     {
+        // Search BOM in file
         $bomString = pack('CCC', 0xef, 0xbb, 0xbf);
         $result = (strncmp($file->getContents(), $bomString, 3) == 0) ? false : true;
 
+        // Inject result in CheckToolTest
         $checkToolTest = new CheckToolTest($result);
         $checkToolTest->setDescription('Check BOM on ' . $file->getRelativePathname());
 

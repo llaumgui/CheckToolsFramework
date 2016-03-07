@@ -32,6 +32,7 @@ $builder = Builder::create(BUILD_PATH . 'phpct.phar');
 $builder->buildFromIterator(
     Finder::create()
         ->files()
+        ->name('*.json')
         ->name('*.php')
         ->name('*.yml')
         ->in(ROOT_PATH . '/src')
@@ -43,7 +44,9 @@ $builder->buildFromIterator(
 $builder->buildFromIterator(
     Finder::create()
         ->files()
+        ->name('*.json')
         ->name('*.php')
+        ->name('*.yml')
         ->exclude(['Tests', 'tests', 'phpunit'])
         ->in(ROOT_PATH . '/vendor')
         ->getIterator(),

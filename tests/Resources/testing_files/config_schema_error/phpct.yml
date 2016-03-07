@@ -1,0 +1,20 @@
+# Global configuration for all checktools
+global__config:
+    # Like --path-exclusion:
+    # Directory name pattern extension (can use regular expression)
+    path__exclusion: "/tests/"
+
+    # Like --output:
+    #Junit XML ouput
+    #output: ""
+
+    # Like --filename-exclusion
+    # File name pattern extension (can use regular expression)
+    #filename_exclusion: ""
+
+    # Like --noignore-vcs
+    #no_ignore_vcs: ""
+
+checker_:
+    - bom
+    - json

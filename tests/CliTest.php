@@ -32,22 +32,23 @@ class CliTest extends PhpUnitHelper
     protected $consoleStub;
 
     /**
-     * @var array
-     */
-    protected $commandsToLoad = [
-        'Llaumgui\CheckToolsFramework\Command\BomCommand'
-    ];
-
-
-    /**
      * Setup mock for test.
      */
     protected function setUp()
     {
+        $this->buildContainer();
+        $this->mockFileSystem();
+
+        // Build a stub of Application
         $this->consoleStub = $this
             ->getMockBuilder('Llaumgui\CheckToolsFramework\Console\Application')
             ->getMock();
-        $this->cli = new Cli($this->consoleStub, $this->commandsToLoad);
+
+        // Mock getContainer
+        $this->consoleStub->method('getContainer')
+             ->will($this->returnValue($this->container));
+
+        $this->cli = new Cli($this->consoleStub);
     }
 
 
@@ -59,20 +60,6 @@ class CliTest extends PhpUnitHelper
         $this->assertInstanceOf(
             'Llaumgui\CheckToolsFramework\Console\Application',
             $this->getPrivateProperty($this->cli, 'console')->getValue($this->cli)
-        );
-        $this->assertEquals(
-            $this->commandsToLoad,
-            $this->getPrivateProperty($this->cli, 'commandsToLoad')->getValue($this->cli)
-        );
-    }
-
-
-    public function testGetDefinition()
-    {
-        $this->assertInstanceOf(
-            'Symfony\Component\Console\Input\InputDefinition',
-            $this->getPrivateMethod($this->cli, 'getDefinition')
-                ->invokeArgs($this->cli, [])
         );
     }
 }

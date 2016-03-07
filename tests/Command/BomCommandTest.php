@@ -13,37 +13,19 @@ namespace Tests\Llaumgui\CheckToolsFramework\Command;
 
 use Tests\Llaumgui\CheckToolsFramework\PhpUnitHelper;
 use Llaumgui\CheckToolsFramework\Console\Application;
-use Llaumgui\CheckToolsFramework\Command\BomCommand;
-use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\Console\Output\OutputInterface;
-use org\bovigo\vfs\vfsStream;
 use Llaumgui\JunitXml\JunitXmlValidation;
+use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class BomCommandTest extends PhpUnitHelper
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-    /**
-     * @var org\bovigo\vfs\vfsStreamDirectory
-     */
-    protected $mockedFileSystem;
-
-
     /**
      * Setup container for test.
      */
     protected function setUp()
     {
-        $this->container = new ContainerBuilder();
-        $definitions = [
-            'ctf.checktool_bom' => new Definition('Llaumgui\CheckToolsFramework\CheckTool\BomCheckTool')
-        ];
-        $this->container->setDefinitions($definitions);
-        $this->mockedFileSystem = vfsStream::setup();
+        $this->buildContainer();
+        $this->mockFileSystem();
     }
 
 
@@ -53,7 +35,7 @@ class BomCommandTest extends PhpUnitHelper
     public function testExecute()
     {
         $application = new Application();
-        $application->add(new BomCommand());
+        $application->add($this->container->get('ctf.command.bom'));
         $application->setContainer($this->container);
 
         $command = $application->find('bom');
@@ -61,7 +43,7 @@ class BomCommandTest extends PhpUnitHelper
         $commandTester->execute(
             [
                 'command'       => $command->getName(),
-                'path'          => __DIR__ . '/../files',
+                'path'          => PATH_TESING_FILES,
                 '--filename'    => '/bom_(ok|ko).php$/',
                 '--path-exclusion'      => '/bomToExclude/',
                 '--output'      => $this->mockedFileSystem->url() . '/junit.xml'
@@ -78,10 +60,16 @@ class BomCommandTest extends PhpUnitHelper
         // Test status code
         $this->assertEquals(1, $commandTester->getStatusCode());
 
-        // test file output
+        // Test file output format
         $this->assertTrue($this->mockedFileSystem->hasChild('junit.xml'));
         $this->assertTrue(JunitXmlValidation::validateXsdFromString(
             $this->mockedFileSystem->getChild('junit.xml')->getContent()
         ));
+
+        // Test file output content
+        $this->assertXmlStringEqualsXmlFile(
+            $this->xmlResultPath('bom_command_test.xml'),
+            JunitXmlValidation::getTestableXmlOutput($this->mockedFileSystem->getChild('junit.xml')->getContent())
+        );
     }
 }

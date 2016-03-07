@@ -22,6 +22,7 @@ before_script:
 script:
   - ./vendor/bin/phpunit --configuration phpunit.xml.dist --coverage-text --coverage-clover build/logs/clover.xml --coverage-html build/coverage
   - ./vendor/bin/phpcs
+  - ./bin/phpct fcf
 
 after_script:
   # TestReporter seem desn't work with these version og PHP

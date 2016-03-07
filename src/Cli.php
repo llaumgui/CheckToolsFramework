@@ -23,30 +23,24 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class Cli
 {
-    /***
+    /**
      * @var Llaumgui\CheckToolsFramework\Console\Application
      */
     private $console;
-    /***
-     * @var array
-     */
-    private $commandsToLoad;
 
 
     /**
      * Service constructor.
      *
-     * @param Application $console        Application instance.
-     * @param array       $commandsToLoad List of commands to load.
+     * @param Application $console Application instance.
      */
-    public function __construct(Application $console, array $commandsToLoad)
+    public function __construct(Application $console)
     {
         $this->console = $console;
-        $this->commandsToLoad = $commandsToLoad;
 
         // Set the Application definition
         $this->console->setDefinition($this->getDefinition());
-        $this->loadCommands();
+        $this->loadCommandsFromServicesTag();
 
         $this->console->run();
     }
@@ -75,12 +69,14 @@ class Cli
 
 
     /**
-     * Load commands from configuration.
+     * Load commands from service configuration, use "console.command" tag.
      */
-    private function loadCommands()
+    private function loadCommandsFromServicesTag()
     {
-        foreach ($this->commandsToLoad as $command) {
-            $this->console->add(new $command());
+        $container = $this->console->getContainer();
+        $taggedCommand = array_keys($container->findTaggedServiceIds('console.command'));
+        foreach ($taggedCommand as $serviceId) {
+            $this->console->add($container->get($serviceId));
         }
     }
 }

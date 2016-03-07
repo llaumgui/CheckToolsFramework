@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<testsuites name="Check several items." tests="21" errors="2" failures="0" time="0">
+    <testsuite timestamp="2015-05-21T09:30:00+02:00" errors="1" failures="0" skipped="0" name="Check BOM in files." tests="17" time="0">
+        <testcase name="Check BOM on bomToExclude/bom_pathexclude.php" classname="bomToExclude/bom_pathexclude.php" assertions="1" time="0"/>
+        <testcase name="Check BOM on bom_ko.php" classname="bom_ko.php" assertions="1" time="0">
+            <error>The file "bom_ko.php" has BOM.</error>
+        </testcase>
+        <testcase name="Check BOM on bom_ok.php" classname="bom_ok.php" assertions="1" time="0"/>
+        <testcase name="Check BOM on crlf_ko.json" classname="crlf_ko.json" assertions="1" time="0"/>
+        <testcase name="Check BOM on crlf_ko.php" classname="crlf_ko.php" assertions="1" time="0"/>
+        <testcase name="Check BOM on crlf_ko.twig" classname="crlf_ko.twig" assertions="1" time="0"/>
+        <testcase name="Check BOM on crlf_ko.xml" classname="crlf_ko.xml" assertions="1" time="0"/>
+        <testcase name="Check BOM on crlf_ko.yml" classname="crlf_ko.yml" assertions="1" time="0"/>
+        <testcase name="Check BOM on encoding_ko.json" classname="encoding_ko.json" assertions="1" time="0"/>
+        <testcase name="Check BOM on encoding_ko.php" classname="encoding_ko.php" assertions="1" time="0"/>
+        <testcase name="Check BOM on encoding_ko.twig" classname="encoding_ko.twig" assertions="1" time="0"/>
+        <testcase name="Check BOM on encoding_ko.xml" classname="encoding_ko.xml" assertions="1" time="0"/>
+        <testcase name="Check BOM on encoding_ko.yml" classname="encoding_ko.yml" assertions="1" time="0"/>
+        <testcase name="Check BOM on json_ko.json" classname="json_ko.json" assertions="1" time="0"/>
+        <testcase name="Check BOM on json_ok.json" classname="json_ok.json" assertions="1" time="0"/>
+        <testcase name="Check BOM on xml_ok.xml" classname="xml_ok.xml" assertions="1" time="0"/>
+        <testcase name="Check BOM on yml_ok.yml" classname="yml_ok.yml" assertions="1" time="0"/>
+    </testsuite>
+    <testsuite timestamp="2015-05-21T09:30:00+02:00" errors="1" failures="0" skipped="0" name="Check JSON syntax." tests="4" time="0">
+        <testcase name="Check the JSON syntax of crlf_ko.json" classname="crlf_ko.json" assertions="1" time="0"/>
+        <testcase name="Check the JSON syntax of encoding_ko.json" classname="encoding_ko.json" assertions="1" time="0"/>
+        <testcase name="Check the JSON syntax of json_ko.json" classname="json_ko.json" assertions="1" time="0">
+            <error>The file "json_ko.json" has an JSON error: Syntax error</error>
+        </testcase>
+        <testcase name="Check the JSON syntax of json_ok.json" classname="json_ok.json" assertions="1" time="0"/>
+    </testsuite>
+</testsuites>

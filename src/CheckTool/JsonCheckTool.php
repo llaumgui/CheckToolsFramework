@@ -11,58 +11,51 @@
 
 namespace Llaumgui\CheckToolsFramework\CheckTool;
 
+use Llaumgui\CheckToolsFramework\CheckTool\CheckTool;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * The service JsonCheckTool.
  */
-class JsonCheckTool implements CheckToolInterface
+class JsonCheckTool extends CheckTool implements CheckToolInterface
 {
     /**
-     * testSuites description..
-     * @var string
-     */
-    private $testSuitesDescription = 'Check JSON.';
-    /**
-     * testSuite description..
-     * @var string
-     */
-    private $testSuiteDescription = 'Check JSON syntax.';
-
-
-    /**
-     * textSuitesDescription getter.
-     *
-     * @return string
-     */
-    public function getTestSuitesDescription()
-    {
-        return $this->testSuitesDescription;
-    }
-
-
-    /**
-     * textSuiteDescription getter.
-     *
-     * @return string
-     */
-    public function getTestSuiteDescription()
-    {
-        return $this->testSuiteDescription;
-    }
-
-
-    /**
-     * Check if content has BOM.
+     * Check if content is valid.
      *
      * @param SplFileInfo $file The $finder to check.
      *
-     * @return CheckToolTest Return a CheckToolsResult object.
+     * @return CheckToolTest Return a CheckToolTest object.
      */
     public function doCheck(SplFileInfo $file)
     {
+        // Load JSON error
         json_decode($file->getContents());
-        switch (json_last_error()) {
+        list($result, $message) = $this->getJsonError(json_last_error());
+
+        // Inject result in CheckToolTest
+        $checkToolTest = new CheckToolTest($result);
+        $checkToolTest->setDescription('Check the JSON syntax of ' . $file->getRelativePathname());
+
+        if (!$result) {
+            $checkToolTest->setMessage(
+                'The file "' . $file->getRelativePathname() . '" has an JSON error: ' . $message
+            );
+        }
+
+        return $checkToolTest;
+    }
+
+
+    /**
+     * Get human error from json_last_error error code.
+     *
+     * @param integer $errorCode The error code.
+     *
+     * @return array Return a array.
+     */
+    public function getJsonError($errorCode)
+    {
+        switch ($errorCode) {
             case JSON_ERROR_NONE:
                 $result = true;
                 $message = '';
@@ -85,7 +78,6 @@ class JsonCheckTool implements CheckToolInterface
                 $result = false;
                 $message = 'Control character error, possibly incorrectly encoded';
                 break;
-
             case JSON_ERROR_UTF8:
                 $result = false;
                 $message = 'Malformed UTF-8 characters, possibly incorrectly encoded';
@@ -106,16 +98,8 @@ class JsonCheckTool implements CheckToolInterface
                 $result = false;
                 $message = 'has an unknown error';
                 break;
-            // @codeCoverageIgnoreEnd
-        }
+        }// @codeCoverageIgnoreEnd
 
-        $checkToolTest = new CheckToolTest($result);
-        $checkToolTest->setDescription('Check the JSON syntax of ' . $file->getRelativePathname());
-
-        if (!$result) {
-            $checkToolTest->setMessage('The file "' . $file->getRelativePathname() . '" has an JSO error: ' . $message);
-        }
-
-        return $checkToolTest;
+        return array($result, $message);
     }
 }
