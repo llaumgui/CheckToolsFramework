@@ -40,7 +40,7 @@ class Extension implements ExtensionInterface, PrependExtensionInterface
 
         // Set parameter
         $container->setParameter('check_tools_framework.name', 'CheckToolsFramework');
-        $container->setParameter('check_tools_framework.version', '0.2.0');
+        $container->setParameter('check_tools_framework.version', '0.3.0');
 
         // Inject parameters by checktools
         foreach ($config['check_tools'] as $checkToolsName => $checkToolsConfig) {
