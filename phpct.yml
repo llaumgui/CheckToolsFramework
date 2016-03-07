@@ -2,7 +2,7 @@
 global_config:
     # Like --path-exclusion:
     # Directory name pattern extension (can use regular expression)
-    path_exclusion: "/tests/"
+    path_exclusion: "#tests/Resources/testing_files/#"
 
     # Like --output:
     #Junit XML ouput
