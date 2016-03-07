@@ -67,8 +67,8 @@ class BomCommandTest extends PhpUnitHelper
         ));
 
         // Test file output content
-        $this->assertXmlStringEqualsXmlString(
-            $this->xmlResultLoader('bom_command_test.xml'),
+        $this->assertXmlStringEqualsXmlFile(
+            $this->xmlResultPath('bom_command_test.xml'),
             JunitXmlValidation::getTestableXmlOutput($this->mockedFileSystem->getChild('junit.xml')->getContent())
         );
     }

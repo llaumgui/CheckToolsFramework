@@ -66,8 +66,8 @@ class JsonCommandTest extends PhpUnitHelper
         ));
 
         // Test file output content
-        $this->assertXmlStringEqualsXmlString(
-            $this->xmlResultLoader('json_command_test.xml'),
+        $this->assertXmlStringEqualsXmlFile(
+            $this->xmlResultPath('json_command_test.xml'),
             JunitXmlValidation::getTestableXmlOutput($this->mockedFileSystem->getChild('junit.xml')->getContent())
         );
     }

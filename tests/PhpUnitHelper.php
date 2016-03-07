@@ -75,14 +75,14 @@ class PhpUnitHelper extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Load a XML result file for test.
+     * Find path of a XML result file for test.
      *
      * @param string $xmlFile Name of the XML file?
-     * @return string String content of XML.
+     * @return string String path of XML.
      */
-    public function xmlResultLoader($xmlFile)
+    public function xmlResultPath($xmlFile)
     {
-        return file_get_contents(PATH_TESING_XML . '/' . $xmlFile);
+        return PATH_TESING_XML . '/' . $xmlFile;
     }
 
 

@@ -251,6 +251,7 @@ abstract class CheckToolsCommand extends Command
         // Set finder
         $finder = new Finder();
         $finder
+            ->sortByName()
             ->in($this->path)
             ->files()->name($this->fileNamePatern)
             ->ignoreVCS($this->ignoreVcs);

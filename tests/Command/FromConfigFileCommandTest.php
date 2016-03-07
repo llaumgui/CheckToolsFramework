@@ -77,8 +77,8 @@ class FromConfigFileCommandTest extends PhpUnitHelper
         ));
 
         // Test file output content
-        $this->assertXmlStringEqualsXmlString(
-            $this->xmlResultLoader('from_config_file_command_test.xml'),
+        $this->assertXmlStringEqualsXmlFile(
+            $this->xmlResultPath('from_config_file_command_test.xml'),
             JunitXmlValidation::getTestableXmlOutput($this->mockedFileSystem->getChild('junit.xml')->getContent())
         );
     }
