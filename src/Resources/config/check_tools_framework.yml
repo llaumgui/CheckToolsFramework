@@ -15,5 +15,5 @@ check_tools_framework:
         yaml:
             test_suites_description: "Check YAML.'"
             test_suite_description: "Check YAML syntax."
-            default_file_name_patern: '/.(yml|yaml)/'
+            default_file_name_patern: '/.(yml|yaml)$/'
 
