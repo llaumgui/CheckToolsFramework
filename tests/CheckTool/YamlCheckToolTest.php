@@ -12,29 +12,33 @@
 namespace Tests\Llaumgui\CheckToolsFramework\CheckTool;
 
 use Tests\Llaumgui\CheckToolsFramework\PhpUnitHelper;
-use Llaumgui\CheckToolsFramework\CheckTool\JsonCheckTool;
+use Llaumgui\CheckToolsFramework\CheckTool\YamlCheckTool;
 use Symfony\Component\Finder\Finder;
 
-class JsonCheckToolTest extends PhpUnitHelper
+class YamlheckToolTest extends PhpUnitHelper
 {
 
     /**
-     * Check if JSON is valide
+     * Check if YAML is valide
      */
     public function testDoCheck()
     {
         // Load CheckTool
         $config = $this->yamlLoader('check_tools_framework.yml');
-        $jsonCheckTool = new JsonCheckTool($config['check_tools_framework']['check_tools']['json']);
+        $yamlCheckTool = new YamlCheckTool($config['check_tools_framework']['check_tools']['yaml']);
 
         // Get testing files
         $finder = new Finder();
-        $finder->files()->in(PATH_TESING_FILES)->name('/\.json/');
+        $finder->files()
+            ->in(PATH_TESING_FILES)
+            ->name('/\.yml/')
+            ->depth(0);
 
         $count = 0;
         foreach ($finder as $file) {
-            $check = $jsonCheckTool->doCheck($file);
-            if (strpos($file->getFileName(), "json_ko") !== false) {
+            $check = $yamlCheckTool->doCheck($file);
+            if (strpos($file->getFileName(), "yaml_ko") !== false
+                    || strpos($file->getFileName(), "encoding_ko") !== false) {
                 $this->assertFalse($check->getResult());
                 $count++;
             } else {

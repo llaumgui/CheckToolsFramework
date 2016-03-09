@@ -49,6 +49,8 @@ class JsonCheckTool extends CheckTool implements CheckToolInterface
     /**
      * Get human error from json_last_error error code.
      *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity) Because it's PHP native.
+
      * @param integer $errorCode The error code.
      *
      * @return array Return a array.
@@ -96,7 +98,7 @@ class JsonCheckTool extends CheckTool implements CheckToolInterface
                 break;
             default:
                 $result = false;
-                $message = 'has an unknown error';
+                $message = 'Unknown error';
                 break;
         }// @codeCoverageIgnoreEnd
 

@@ -1,19 +1,19 @@
 check_tools_framework:
     check_tools:
         bom:
-            test_suites_description: "Check BOM.'"
-            test_suite_description: "Check BOM in files."
+            test_suites_description: "Check BOM"
+            test_suite_description: "Check BOM in files"
             default_file_name_patern: '*'
         from_config_file:
-            test_suites_description: "Check several items."
-            test_suite_description: "Check."
+            test_suites_description: "Check several items"
+            test_suite_description: "Check"
             default_file_name_patern: '*'
         json:
-            test_suites_description: "Check JSON.'"
-            test_suite_description: "Check JSON syntax."
+            test_suites_description: "Check JSON"
+            test_suite_description: "Check JSON syntax"
             default_file_name_patern: '/.json$/'
         yaml:
-            test_suites_description: "Check YAML.'"
-            test_suite_description: "Check YAML syntax."
-            default_file_name_patern: '/.(yml|yaml)/'
+            test_suites_description: "Check YAML"
+            test_suite_description: "Check YAML syntax"
+            default_file_name_patern: '/.(yml|yaml)$/'
 

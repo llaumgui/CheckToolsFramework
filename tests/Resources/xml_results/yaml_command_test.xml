@@ -1,0 +1,8 @@
+<testsuites name="Check YAML" tests="2" errors="1" failures="0" time="0">
+    <testsuite errors="1" failures="0" name="Check YAML syntax" skipped="0" tests="2" time="0" timestamp="2015-05-21T09:30:00+02:00">
+    <testcase assertions="1" classname="yaml_ko.yml" name="Check the YAML syntax of yaml_ko.yml" time="0">
+            <error>The file "yaml_ko.yml" has an YAML error: Unable to parse at line 2 (near "l&#xE9;gumes").</error>
+        </testcase>
+        <testcase assertions="1" classname="yaml_ok.yml" name="Check the YAML syntax of yaml_ok.yml" time="0"/>
+    </testsuite>
+</testsuites>

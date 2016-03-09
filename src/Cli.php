@@ -74,7 +74,7 @@ class Cli
     private function loadCommandsFromServicesTag()
     {
         $container = $this->console->getContainer();
-        $taggedCommand = array_keys($container->findTaggedServiceIds('console.command'));
+        $taggedCommand = array_keys($container->findTaggedServiceIds('phpct.command'));
         foreach ($taggedCommand as $serviceId) {
             $this->console->add($container->get($serviceId));
         }

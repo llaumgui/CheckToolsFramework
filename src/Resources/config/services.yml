@@ -18,17 +18,7 @@ services:
         class:      Llaumgui\CheckToolsFramework\Command\BomCommand
         arguments:  ["bom", "@ctf.checktool.bom"]
         tags:
-            -  { name: console.command }
-
-    # json
-    ctf.checktool.json:
-        class:      Llaumgui\CheckToolsFramework\CheckTool\JsonCheckTool
-        arguments:  ["%check_tools_framework.check_tools.json%"]
-    ctf.command.json:
-        class:      Llaumgui\CheckToolsFramework\Command\JsonCommand
-        arguments:  ["json", "@ctf.checktool.json"]
-        tags:
-            -  { name: console.command }
+            -  { name: phpct.command }
 
     # from_config_file
     ctf.checktool.from_config_file:
@@ -38,5 +28,24 @@ services:
         class:      Llaumgui\CheckToolsFramework\Command\FromConfigFileCommand
         arguments:  ["from_config_file", "@ctf.checktool.from_config_file"]
         tags:
-            -  { name: console.command }
+            -  { name: phpct.command }
 
+    # json
+    ctf.checktool.json:
+        class:      Llaumgui\CheckToolsFramework\CheckTool\JsonCheckTool
+        arguments:  ["%check_tools_framework.check_tools.json%"]
+    ctf.command.json:
+        class:      Llaumgui\CheckToolsFramework\Command\JsonCommand
+        arguments:  ["json", "@ctf.checktool.json"]
+        tags:
+            -  { name: phpct.command }
+
+    # yaml
+    ctf.checktool.yaml:
+        class:      Llaumgui\CheckToolsFramework\CheckTool\YamlCheckTool
+        arguments:  ["%check_tools_framework.check_tools.yaml%"]
+    ctf.command.yaml:
+        class:      Llaumgui\CheckToolsFramework\Command\YamlCommand
+        arguments:  ["yaml", "@ctf.checktool.yaml"]
+        tags:
+            -  { name: phpct.command }

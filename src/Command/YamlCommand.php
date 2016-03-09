@@ -14,9 +14,9 @@ namespace Llaumgui\CheckToolsFramework\Command;
 use Llaumgui\CheckToolsFramework\Command\CheckToolsCommand;
 
 /**
- * The JsonCommand class.
+ * The BomCommand class.
  */
-class JsonCommand extends CheckToolsCommand
+class YamlCommand extends CheckToolsCommand
 {
     /**
      * Configures the current command.
@@ -24,11 +24,12 @@ class JsonCommand extends CheckToolsCommand
     protected function configure()
     {
         $this
-            ->setDescription('Test if JSON files are valides')
+            ->setDescription('Test if YAML files are valides')
             // @codingStandardsIgnoreStart
             ->setHelp('For more information about regular expression, see <fg=blue>http://symfony.com/doc/current/components/finder.html</fg=blue>.' . "\n\n"
                 . 'Example: Check all ".json" in "vendor/Llaumgui", exculding "Tests" directory:' . "\n"
-                . 'php bin/phpct json --path-exclusion="/Tests/" vendor/Llaumgui')
+                . 'php bin/phpct yaml --path-exclusion="/Tests/" vendor/Llaumgui')
+            ->setAliases(['yml'])
             // @codingStandardsIgnoreEnd
         ;
 
