@@ -62,4 +62,20 @@ class CliTest extends PhpUnitHelper
             $this->getPrivateProperty($this->cli, 'console')->getValue($this->cli)
         );
     }
+
+
+    /**
+     * Test loading by tag
+     */
+    public function testLoadCommandsFromServicesTag()
+    {
+        $i = 0;
+        $taggedCommand = array_keys($this->container->findTaggedServiceIds('phpct.command'));
+        foreach ($taggedCommand as $serviceId) {
+            $i++;
+        }
+
+        // Call test
+        $this->assertEquals(3, $i);
+    }
 }
