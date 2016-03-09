@@ -1,5 +1,5 @@
-<testsuites name="Check BOM.'" tests="2" errors="1" failures="0" time="0">
-    <testsuite timestamp="2015-05-21T09:30:00+02:00" errors="1" failures="0" skipped="0" name="Check BOM in files." tests="2" time="0">
+<testsuites name="Check BOM" tests="2" errors="1" failures="0" time="0">
+    <testsuite timestamp="2015-05-21T09:30:00+02:00" errors="1" failures="0" skipped="0" name="Check BOM in files" tests="2" time="0">
         <testcase name="Check BOM on bom_ko.php" classname="bom_ko.php" assertions="1" time="0">
             <error>The file "bom_ko.php" has BOM.</error>
         </testcase>

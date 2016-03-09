@@ -37,7 +37,7 @@ class YamlheckToolTest extends PhpUnitHelper
         $count = 0;
         foreach ($finder as $file) {
             $check = $yamlCheckTool->doCheck($file);
-            if (strpos($file->getFileName(), "yml_ko") !== false
+            if (strpos($file->getFileName(), "yaml_ko") !== false
                     || strpos($file->getFileName(), "encoding_ko") !== false) {
                 $this->assertFalse($check->getResult());
                 $count++;

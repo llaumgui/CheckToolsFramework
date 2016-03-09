@@ -76,6 +76,6 @@ class CliTest extends PhpUnitHelper
         }
 
         // Call test
-        $this->assertEquals(3, $i);
+        $this->assertEquals(4, $i);
     }
 }
